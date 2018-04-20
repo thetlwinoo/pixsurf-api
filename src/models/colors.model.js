@@ -1,13 +1,11 @@
-// warehouse.colors-model.js - A mongoose model
+// colors-model.js - A mongoose model
 // 
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
 module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
-  const {
-    Schema
-  } = mongooseClient;
-  const warehouseColors = new Schema({
+  const { Schema } = mongooseClient;
+  const colors = new Schema({
     colorName: {
       type: String,
       required: true
@@ -25,5 +23,5 @@ module.exports = function (app) {
     timestamps: true
   });
 
-  return mongooseClient.model('warehouseColors', warehouseColors);
+  return mongooseClient.model('colors', colors);
 };

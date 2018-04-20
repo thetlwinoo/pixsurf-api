@@ -1,11 +1,11 @@
-// warehouse.stockGroups-model.js - A mongoose model
+// stockGroups-model.js - A mongoose model
 // 
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
 module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
-  const warehouseStockGroups = new Schema({
+  const stockGroups = new Schema({
     stockGroupName: {
       type: String,
       required: true
@@ -23,5 +23,5 @@ module.exports = function (app) {
     timestamps: true
   });
 
-  return mongooseClient.model('warehouseStockGroups', warehouseStockGroups);
+  return mongooseClient.model('stockGroups', stockGroups);
 };

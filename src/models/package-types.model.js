@@ -1,11 +1,11 @@
-// warehouse.packageTypes-model.js - A mongoose model
+// packageTypes-model.js - A mongoose model
 // 
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
 module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
-  const warehousePackageTypes = new Schema({
+  const packageTypes = new Schema({
     packageTypeName: {
       type: String,
       required: true
@@ -23,5 +23,5 @@ module.exports = function (app) {
     timestamps: true
   });
 
-  return mongooseClient.model('warehousePackageTypes', warehousePackageTypes);
+  return mongooseClient.model('packageTypes', packageTypes);
 };

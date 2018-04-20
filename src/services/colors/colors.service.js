@@ -1,23 +1,23 @@
-// Initializes the `warehouse.stockGroups` service on path `/warehouse-stock-groups`
+// Initializes the `colors` service on path `/warehouse/colors`
 const createService = require('feathers-mongoose');
-const createModel = require('../../models/warehouse-stock-groups.model');
-const hooks = require('./warehouse-stock-groups.hooks');
+const createModel = require('../../models/colors.model');
+const hooks = require('./colors.hooks');
 
 module.exports = function (app) {
   const Model = createModel(app);
   const paginate = app.get('paginate');
 
   const options = {
-    name: 'warehouse-stock-groups',
+    name: 'colors',
     Model,
     paginate
   };
 
   // Initialize our service with any options it requires
-  app.use('/warehouse-stock-groups', createService(options));
+  app.use('/warehouse/colors', createService(options));
 
   // Get our initialized service so that we can register hooks and filters
-  const service = app.service('warehouse-stock-groups');
+  const service = app.service('warehouse/colors');
 
   service.hooks(hooks);
 };
