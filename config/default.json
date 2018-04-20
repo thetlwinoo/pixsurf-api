@@ -1,0 +1,34 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "authentication": {
+    "secret": "7e32cb46cf04e57daac052df2555ff048ed1682bc1c36fc66d5ea8494eb99631db81b656320bcf2f02d976ffe6cbfc03babd4f4aa744ff67905bac8cc2e842f02a20e755ddd1b2fb6142fd37e36ea37bc461aa1590e49e6056d889f7bf64f6d7a9750df64d1bbac5250536cf43d319c92cea17988c985dcdead04fe69e19c4f063a2e5b5d206377f41844a962812e7de1d8b5f274fdd5ac7f4cdc0b679fba077d0441946d64634f60f5fdd3498ca07256a6890cdc878e7c3a0386c344d18dc8a35cd1474aa5b63e183e8d9977f7e98050cc53e7599f7d7e05b1f54ec13d96fbc37cf04e914bb97222608aba3c6309d54d043a80395d4c3286b0889df687b7c57",
+    "strategies": [
+      "jwt",
+      "local"
+    ],
+    "path": "/authentication",
+    "service": "users",
+    "jwt": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "subject": "anonymous",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "entity": "user",
+      "usernameField": "email",
+      "passwordField": "password"
+    }
+  },
+  "mongodb": "mongodb://localhost:27017/pixsurf_api"
+}
