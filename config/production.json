@@ -1,4 +1,4 @@
 {
-  "host": "pixsurf-api-app.feathersjs.com",
+  "host": "https://pixsurf-api.herokuapp.com/",
   "port": "PORT"
 }
