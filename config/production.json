@@ -1,4 +1,5 @@
 {
   "host": "https://pixsurf-api.herokuapp.com/",
-  "port": "8080"
+  "port": "8080",
+  "mongodb": "mongodb://ds027835.mlab.com:27835/heroku_91t49rmg"
 }
