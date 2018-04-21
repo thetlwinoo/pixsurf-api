@@ -1,4 +1,4 @@
 {
   "host": "https://pixsurf-api.herokuapp.com/",
-  "port": "PORT"
+  "port": "8080"
 }
