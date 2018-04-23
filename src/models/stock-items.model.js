@@ -15,8 +15,7 @@ module.exports = function (app) {
       required: true
     },
     colorID: {
-      type: Schema.Types.ObjectId,
-      required: true
+      type: Schema.Types.ObjectId
     },
     unitPackageID: {
       type: Schema.Types.ObjectId,
@@ -27,64 +26,55 @@ module.exports = function (app) {
       required: true
     },
     brand: {
-      type: String,
-      required: true
+      type: String
     },
     size: {
-      type: String,
-      required: true
+      type: String
     },
     leadTimeDays: {
-      type: String,
+      type: Number,
       required: true
     },
     quantityPerOuter: {
-      type: String,
+      type: Number,
       required: true
     },
     isChillerStock: {
-      type: String,
+      type: Boolean,
       required: true
     },
     barcode: {
-      type: String,
-      required: true
+      type: String
     },
     taxRate: {
-      type: String,
+      type: Number,
       required: true
     },
     unitPrice: {
-      type: String,
+      type: Number,
       required: true
     },
     recommendedRetailPrice: {
-      type: String,
-      required: true
+      type: Number
     },
     typicalWeightPerUnit: {
-      type: String,
+      type: Number,
       required: true
     },
     marketingComments: {
-      type: String,
-      required: true
+      type: String
     },
     internalComments: {
-      type: String,
-      required: true
+      type: String
     },
     photo: {
-      type: String,
-      required: true
+      type: String
     },
     customFields: {
-      type: String,
-      required: true
+      type: String
     },
     tags: {
-      type: String,
-      required: true
+      type: String
     },
     searchDetails: {
       type: String,
@@ -95,11 +85,11 @@ module.exports = function (app) {
       required: true
     },
     validFrom: {
-      type: String,
+      type: Date,
       required: true
     },
     validTo: {
-      type: String,
+      type: Date,
       required: true
     },
   }, {

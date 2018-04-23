@@ -11,13 +11,16 @@ module.exports = function (app) {
       required: true
     },
     lastEditedBy: {
-      type: Schema.Types.ObjectId
+      type: Schema.Types.ObjectId,
+      required: true
     },
     validFrom: {
-      type: String
+      type: Date,
+      required: true
     },
     validTo: {
-      type: String
+      type: Date,
+      required: true
     },
   }, {
     timestamps: true
