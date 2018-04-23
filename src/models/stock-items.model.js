@@ -4,7 +4,9 @@
 // for more of what you can do here.
 module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
-  const { Schema } = mongooseClient;
+  const {
+    Schema
+  } = mongooseClient;
   const stockItems = new Schema({
     stockItemName: {
       type: String,
@@ -70,12 +72,8 @@ module.exports = function (app) {
     photo: {
       type: String
     },
-    customFields: {
-      type: String
-    },
-    tags: {
-      type: String
-    },
+    customFields: Object,
+    tags: [String],
     searchDetails: {
       type: String,
       required: true
