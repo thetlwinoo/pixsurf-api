@@ -7,6 +7,12 @@ const stockItemTransactions = require('./stock-item-transactions/stock-item-tran
 const coldRoomTemperatures = require('./cold-room-temperatures/cold-room-temperatures.service.js');
 const vehicleTemperatures = require('./vehicle-temperatures/vehicle-temperatures.service.js');
 const stockItemHoldings = require('./stock-item-holdings/stock-item-holdings.service.js');
+const suppliers = require('./suppliers/suppliers.service.js');
+const people = require('./people/people.service.js');
+const cities = require('./cities/cities.service.js');
+const countries = require('./countries/countries.service.js');
+const deliveryMethods = require('./delivery-methods/delivery-methods.service.js');
+const stateProvinces = require('./state-provinces/state-provinces.service.js');
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   app.configure(users);
@@ -18,4 +24,10 @@ module.exports = function (app) {
   app.configure(coldRoomTemperatures);
   app.configure(vehicleTemperatures);
   app.configure(stockItemHoldings);
+  app.configure(suppliers);
+  app.configure(people);
+  app.configure(cities);
+  app.configure(countries);
+  app.configure(deliveryMethods);
+  app.configure(stateProvinces);
 };
