@@ -25,7 +25,7 @@ module.exports = {
            l_key: 'lastEditedBy',
            one: true,
            query:  {
-             $select: ['fullName','emailAddress']
+             $select: ['fullName']
            }
          }
       })
