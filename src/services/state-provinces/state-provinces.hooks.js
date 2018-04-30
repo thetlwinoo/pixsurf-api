@@ -22,20 +22,12 @@ module.exports = {
         countryID: {
           service: 'general/countries',
           f_key: '_id',
-          l_key: 'countryID',
-          one: true,
-          query: {
-            $select: ['countryName']
-          }
+          one: true
         },
         lastEditedBy: {
           service: 'general/people',
           f_key: '_id',
-          l_key: 'lastEditedBy',
-          one: true,
-          query: {
-            $select: ['fullName']
-          }
+          one: true
         }
       })
     ],
