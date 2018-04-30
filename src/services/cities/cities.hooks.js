@@ -21,21 +21,13 @@ module.exports = {
       populate({
         stateProvinceID: {
           service: 'general/state-provinces',
-          f_key: 'stateProvinceID',
-          l_key: '_id',
-          one: true,
-          query: {
-            $select: ['stateProvinceName']
-          }
+          f_key: '_id',
+          one: true
         },
          lastEditedBy: {
            service: 'general/people',
            f_key: '_id',
-           l_key: 'lastEditedBy',
            one: true,
-           query:  {
-             $select: ['fullName']
-           }
          }
       })
     ],
