@@ -21,8 +21,8 @@ module.exports = {
       populate({
         stateProvinceID: {
           service: 'general/state-provinces',
-          f_key: '_id',
-          l_key: 'stateProvinceID',
+          f_key: 'stateProvinceID',
+          l_key: '_id',
           one: true,
           query: {
             $select: ['stateProvinceName']
