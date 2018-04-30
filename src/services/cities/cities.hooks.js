@@ -19,6 +19,15 @@ module.exports = {
     all: [],
     find: [
       populate({
+        stateProvinceID: {
+          service: 'general/state-provinces',
+          f_key: '_id',
+          l_key: 'stateProvinceID',
+          one: true,
+          query: {
+            $select: ['stateProvinceName']
+          }
+        },
          lastEditedBy: {
            service: 'general/people',
            f_key: '_id',
