@@ -22,11 +22,7 @@ module.exports = {
         stateProvinceID: {
           service: 'general/state-provinces',
           f_key: 'id',
-          l_key: 'stateProvinceID',
-          one: true,
-          query: {
-            $select: ['stateProvinceName']
-          }
+          one: true
         },
          lastEditedBy: {
            service: 'general/people',
