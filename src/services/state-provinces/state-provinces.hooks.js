@@ -23,7 +23,7 @@ module.exports = {
           service: 'general/countries',
           f_key: '_id',
           l_key: 'countryID',
-          one: false,
+          one: true,
           query: {
             $select: ['countryName']
           }
@@ -32,7 +32,7 @@ module.exports = {
           service: 'general/people',
           f_key: '_id',
           l_key: 'lastEditedBy',
-          one: false,
+          one: true,
           query: {
             $select: ['fullName']
           }
