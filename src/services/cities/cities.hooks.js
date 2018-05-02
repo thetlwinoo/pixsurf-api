@@ -25,7 +25,7 @@ module.exports = {
           l_key: 'stateProvinceID',
           one: true,
           query:  {
-            $select: ['stateProvinceName']
+            $select: ['stateProvinceCode','stateProvinceName']
           }          
         },
          lastEditedBy: {
