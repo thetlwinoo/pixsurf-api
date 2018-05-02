@@ -19,7 +19,7 @@ module.exports = {
     all: [],
     find: [
       populate({
-        stateProvince: {
+        stateProvinceID: {
           service: 'general/state-provinces',
           f_key: '_id',
           l_key: 'stateProvinceID',
