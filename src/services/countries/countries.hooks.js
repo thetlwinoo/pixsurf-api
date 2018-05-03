@@ -16,8 +16,7 @@ module.exports = {
   },
 
   after: {
-    all: [],
-    find: [
+    all: [
       populate({
         lastEditedBy: {
           service: 'general/people',
@@ -30,6 +29,7 @@ module.exports = {
         }
      })
     ],
+    find: [],
     get: [],
     create: [],
     update: [],

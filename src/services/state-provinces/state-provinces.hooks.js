@@ -16,8 +16,7 @@ module.exports = {
   },
 
   after: {
-    all: [],
-    find: [
+    all: [
       populate({
         countryID: {
           service: 'general/countries',
@@ -31,6 +30,7 @@ module.exports = {
         }
       })
     ],
+    find: [],
     get: [],
     create: [],
     update: [],
