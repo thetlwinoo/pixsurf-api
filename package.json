@@ -40,6 +40,7 @@
     "cors": "^2.8.4",
     "feathers-mongoose": "^6.1.0",
     "feathers-populate-hook": "^0.2.3",
+    "feathers-shallow-populate": "^0.2.6",
     "helmet": "^3.12.0",
     "mongoose": "^5.0.15",
     "serve-favicon": "^2.5.0",

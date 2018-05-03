@@ -1,5 +1,8 @@
-const { authenticate } = require('@feathersjs/authentication').hooks;
+const {
+  authenticate
+} = require('@feathersjs/authentication').hooks;
 const populate = require('feathers-populate-hook');
+// const { shallowPopulate } = require('feathers-shallow-populate');
 
 module.exports = {
   before: {
@@ -16,21 +19,22 @@ module.exports = {
   },
 
   after: {
-    all: [],
-    find: [
+    all: [
       populate({
         stateProvinceID: {
           service: 'general/state-provinces',
           f_key: '_id',
-          one: true      
+          one: true
         },
-         lastEditedBy: {
-           service: 'general/people',
-           f_key: '_id',
-           one: true,
-         }
+        lastEditedBy: {
+          service: 'general/people',
+          f_key: '_id',
+          one: true,
+        }
       })
+
     ],
+    find: [],
     get: [],
     create: [],
     update: [],
