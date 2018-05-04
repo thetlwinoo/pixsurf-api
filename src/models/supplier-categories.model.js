@@ -6,7 +6,22 @@ module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
   const supplierCategories = new Schema({
-    text: { type: String, required: true }
+    supplierCategoryName: {
+      type: String,
+      required: true
+    },    
+    lastEditedBy: {
+      type: Schema.Types.ObjectId,
+      required: true
+    },
+    validFrom: {
+      type: String,
+      required: true
+    },
+    validTo: {
+      type: String,
+      required: true
+    },
   }, {
     timestamps: true
   });
