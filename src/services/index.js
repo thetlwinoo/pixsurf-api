@@ -13,6 +13,7 @@ const cities = require('./cities/cities.service.js');
 const countries = require('./countries/countries.service.js');
 const deliveryMethods = require('./delivery-methods/delivery-methods.service.js');
 const stateProvinces = require('./state-provinces/state-provinces.service.js');
+const supplierCategories = require('./supplier-categories/supplier-categories.service.js');
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   app.configure(users);
@@ -30,4 +31,5 @@ module.exports = function (app) {
   app.configure(countries);
   app.configure(deliveryMethods);
   app.configure(stateProvinces);
+  app.configure(supplierCategories);
 };
