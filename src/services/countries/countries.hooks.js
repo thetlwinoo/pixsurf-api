@@ -21,13 +21,9 @@ module.exports = {
         lastEditedBy: {
           service: 'general/people',
           f_key: '_id',
-          l_key: 'lastEditedBy',
           one: true,
-          query:  {
-            $select: ['fullName']
-          }
         }
-     })
+      })
     ],
     find: [],
     get: [],

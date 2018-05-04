@@ -32,7 +32,6 @@ module.exports = {
           one: true,
         }
       })
-
     ],
     find: [],
     get: [],
