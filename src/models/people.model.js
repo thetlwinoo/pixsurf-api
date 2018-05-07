@@ -12,9 +12,6 @@ module.exports = function (app) {
       type: String,
       required: true
     },
-    userId: {
-      type: String
-    },
     preferredName: {
       type: String,
       required: true
@@ -47,7 +44,7 @@ module.exports = function (app) {
       required: true
     },
     userPreferences: {
-      type: String
+      type: Object
     },
     phoneNumber: {
       type: String
@@ -64,9 +61,7 @@ module.exports = function (app) {
     customFields: {
       type: Object
     },
-    otherLanguages: {
-      type: String
-    },
+    otherLanguages: [String],
     lastEditedBy: {
       type: Schema.Types.ObjectId,
       required: true
