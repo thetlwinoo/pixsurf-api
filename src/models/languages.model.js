@@ -4,7 +4,9 @@
 // for more of what you can do here.
 module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
-  const { Schema } = mongooseClient;
+  const {
+    Schema
+  } = mongooseClient;
   const languages = new Schema({
     languageCode: {
       type: String,
@@ -12,6 +14,10 @@ module.exports = function (app) {
     },
     languageName: {
       type: String,
+      required: true
+    },
+    lastEditedBy: {
+      type: Schema.Types.ObjectId,
       required: true
     }
   }, {
