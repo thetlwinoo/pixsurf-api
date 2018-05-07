@@ -9,8 +9,7 @@ module.exports = function (app) {
   } = mongooseClient;
   const languages = new Schema({
     languageCode: {
-      type: String,
-      required: true
+      type: String
     },
     languageName: {
       type: String,
