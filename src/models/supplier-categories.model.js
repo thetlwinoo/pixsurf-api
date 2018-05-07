@@ -15,11 +15,11 @@ module.exports = function (app) {
       required: true
     },
     validFrom: {
-      type: String,
+      type: Date,
       required: true
     },
     validTo: {
-      type: String,
+      type: Date,
       required: true
     },
   }, {
