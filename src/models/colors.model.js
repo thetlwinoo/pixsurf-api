@@ -6,6 +6,9 @@ module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
   const colors = new Schema({
+    colorCode: {
+      type: String
+    },
     colorName: {
       type: String,
       required: true
