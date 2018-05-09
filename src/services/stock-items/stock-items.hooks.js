@@ -20,11 +20,11 @@ module.exports = {
   after: {
     all: [
       populate({
-        stockGroups: [{
+        stockGroups: {
           service: 'warehouse/stock-groups',
           f_key: '_id',
-          one: true
-        }],
+          one: false
+        },
         supplierID: {
           service: 'purchasing/suppliers',
           f_key: '_id',
