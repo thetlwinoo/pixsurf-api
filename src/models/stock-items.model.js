@@ -12,6 +12,14 @@ module.exports = function (app) {
       type: String,
       required: true
     },
+    stockGroupList: [{
+      type: Schema.Types.ObjectId,
+      ref: 'stockGroups'
+    }],
+    stockItemHolding: {
+      type: Schema.Types.ObjectId,
+      required: true
+    },
     supplierID: {
       type: Schema.Types.ObjectId,
       required: true
