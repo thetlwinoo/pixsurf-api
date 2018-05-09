@@ -12,7 +12,7 @@ module.exports = function (app) {
       type: String,
       required: true
     },
-    stockGroupList: [{
+    stockGroups: [{
       type: Schema.Types.ObjectId
     }],
     quantityOnHand: {
