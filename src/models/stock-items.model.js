@@ -13,8 +13,7 @@ module.exports = function (app) {
       required: true
     },
     stockGroupList: [{
-      type: Schema.Types.ObjectId,
-      ref: 'stock-groups'
+      type: Schema.Types.ObjectId
     }],
     quantityOnHand: {
       type: Number,
