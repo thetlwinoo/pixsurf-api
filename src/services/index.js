@@ -6,7 +6,6 @@ const stockItems = require('./stock-items/stock-items.service.js');
 const stockItemTransactions = require('./stock-item-transactions/stock-item-transactions.service.js');
 const coldRoomTemperatures = require('./cold-room-temperatures/cold-room-temperatures.service.js');
 const vehicleTemperatures = require('./vehicle-temperatures/vehicle-temperatures.service.js');
-const stockItemHoldings = require('./stock-item-holdings/stock-item-holdings.service.js');
 const suppliers = require('./suppliers/suppliers.service.js');
 const people = require('./people/people.service.js');
 const cities = require('./cities/cities.service.js');
@@ -25,7 +24,6 @@ module.exports = function (app) {
   app.configure(stockItemTransactions);
   app.configure(coldRoomTemperatures);
   app.configure(vehicleTemperatures);
-  app.configure(stockItemHoldings);
   app.configure(suppliers);
   app.configure(people);
   app.configure(cities);

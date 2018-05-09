@@ -16,8 +16,28 @@ module.exports = function (app) {
       type: Schema.Types.ObjectId,
       ref: 'stockGroups'
     }],
-    stockItemHolding: {
-      type: Schema.Types.ObjectId,
+    quantityOnHand: {
+      type: Number,
+      required: true
+    },
+    binLocation: {
+      type: String,
+      required: true
+    },
+    lastStocktakeQuantity: {
+      type: Number,
+      required: true
+    },
+    lastCostPrice: {
+      type: Number,
+      required: true
+    },
+    reorderLevel: {
+      type: Number,
+      required: true
+    },
+    targetStockLevel: {
+      type: Number,
       required: true
     },
     supplierID: {
