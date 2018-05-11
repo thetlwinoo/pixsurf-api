@@ -28,13 +28,12 @@ module.exports = function (app) {
       type: Number,
       required: true
     },
-    width: {
-      type: Number,
-      required: true
+    webkitRelativePath: {
+      type: String
     },
-    height: {
-      type: Number,
-      required: true
+    lastModified: {
+      type: Date,
+      default: Date.now()
     }
   }, {
     timestamps: true
