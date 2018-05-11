@@ -10,7 +10,6 @@ const configuration = require('@feathersjs/configuration');
 const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
 
-
 const middleware = require('./middleware');
 const services = require('./services');
 const appHooks = require('./app.hooks');
@@ -19,6 +18,10 @@ const channels = require('./channels');
 const authentication = require('./authentication');
 
 const mongoose = require('./mongoose');
+
+// const blobService = require('feathers-blob');
+// const fs = require('fs-blob-store');
+// const blobStorage = fs(__dirname + '/uploads');
 
 const app = express(feathers());
 
@@ -39,6 +42,8 @@ app.configure(express.rest());
 app.configure(socketio());
 
 app.configure(mongoose);
+
+// app.use('/uploads', blobService({Model: blobStorage}));
 
 // Configure other middleware (see `middleware/index.js`)
 app.configure(middleware);
