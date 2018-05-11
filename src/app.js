@@ -5,6 +5,8 @@ const cors = require('cors');
 const helmet = require('helmet');
 const logger = require('winston');
 
+const bodyParser = require('body-parser');
+
 const feathers = require('@feathersjs/feathers');
 const configuration = require('@feathersjs/configuration');
 const express = require('@feathersjs/express');
@@ -36,6 +38,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(favicon(path.join(app.get('public'), 'favicon.ico')));
 // Host the public folder
 app.use('/', express.static(app.get('public')));
+
+app.use(bodyParser.json({limit: '10mb'}));
+
+app.use(bodyParser.urlencoded({limit: '10mb', extended: true }));
 
 // Set up Plugins and providers
 app.configure(express.rest());
