@@ -97,7 +97,7 @@ module.exports = function (app) {
       type: String
     },
     photo: {
-      type: String
+      type: Schema.Types.ObjectId
     },
     customFields: Object,
     tags: [String],
