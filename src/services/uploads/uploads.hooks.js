@@ -9,8 +9,8 @@ const {
 module.exports = {
   before: {
     all: [authenticate('jwt')],
-    find: [disallow()],
-    get: [disallow()],
+    find: [],
+    get: [],
     create: [
       function (hook) {
         if (!hook.data.uri && hook.params.file) {
