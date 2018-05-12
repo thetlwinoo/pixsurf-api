@@ -12,6 +12,10 @@ module.exports = function (app) {
       type: String,
       required: true
     },
+    stockItemId: {
+      type: Schema.Types.ObjectId,
+      required: true
+    },
     type: {
       type: String,
       required: true
@@ -30,6 +34,22 @@ module.exports = function (app) {
     lastModified: {
       type: Date,
       default: Date.now()
+    },
+    isBaseImage: {
+      type: Boolean,
+      default: false
+    },
+    isSmallImage: {
+      type: Boolean,
+      default: false
+    },
+    isThumbnail: {
+      type: Boolean,
+      default: false
+    },
+    exclude: {
+      type: Boolean,
+      default: false
     }
   }, {
     timestamps: true

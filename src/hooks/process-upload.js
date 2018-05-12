@@ -30,7 +30,12 @@ module.exports = function (options = {}) {
       path: data.path + '/uploads/' + uploadedImage.id,
       size: uploadedImage.size,
       width: data.width,
-      height: data.height
+      height: data.height,
+      stockItemId: data.stockItemId,
+      isBaseImage: data.isBaseImage,
+      isSmallImage: data.isSmallImage,
+      isThumbnail: data.isThumbnail,
+      exclude: data.exclude
     }
 
     return context;
