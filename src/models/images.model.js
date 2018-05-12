@@ -20,10 +20,6 @@ module.exports = function (app) {
       type: String,
       required: true
     },
-    data: {
-      type: Buffer,
-      contentType: String
-    },
     size: {
       type: Number,
       required: true
