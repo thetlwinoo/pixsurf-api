@@ -1,16 +1,11 @@
-const {
-  authenticate
-} = require('@feathersjs/authentication').hooks;
-const processUpload = require('../../hooks/process-upload');
-const processAuthorize = require('../../hooks/process-authorization');
-const processDriveUpload = require('../../hooks/process-drive-upload');
+const { authenticate } = require('@feathersjs/authentication').hooks;
 
 module.exports = {
   before: {
-    all: [authenticate('jwt')],
+    all: [ authenticate('jwt') ],
     find: [],
     get: [],
-    create: [processAuthorize()],
+    create: [],
     update: [],
     patch: [],
     remove: []

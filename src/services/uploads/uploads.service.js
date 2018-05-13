@@ -8,6 +8,7 @@ const blobStorage = fs('./uploads');
 const multer = require('multer');
 const multipartMiddleware = multer();
 const dauria = require('dauria');
+const cloudinary = require('cloudinary');
 
 module.exports = function (app) {
   const Model = createModel(app);
@@ -19,8 +20,7 @@ module.exports = function (app) {
   };
 
   app.use('/uploads',
-    multipartMiddleware.single('uri'),
-
+    multipartMiddleware.single('uri'),    
     function (req, res, next) {
       req.feathers.file = req.file;
       next();

@@ -18,6 +18,7 @@ module.exports = function (options = {}) {
     const uri = data.uri;
 
     const uploadedImage = await app.service('uploads').create({uri});
+
     // const uri = context.data.uri;
 
     if (!uploadedImage) {
