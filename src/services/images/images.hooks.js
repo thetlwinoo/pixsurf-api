@@ -4,13 +4,14 @@ const {
 const processUpload = require('../../hooks/process-upload');
 const processAuthorize = require('../../hooks/process-authorization');
 const processDriveUpload = require('../../hooks/process-drive-upload');
+const oauth = require('../../hooks/o-auth');
 
 module.exports = {
   before: {
     all: [authenticate('jwt')],
     find: [],
     get: [],
-    create: [processUpload(),processDriveUpload()],
+    create: [oauth()],
     update: [],
     patch: [],
     remove: []

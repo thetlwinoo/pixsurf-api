@@ -6,7 +6,7 @@ module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
   const googleDrive = new Schema({
-    text: { type: String, required: true }
+    text: { type: String}
   }, {
     timestamps: true
   });

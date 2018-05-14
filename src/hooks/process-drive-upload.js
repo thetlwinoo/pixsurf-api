@@ -2,7 +2,9 @@
 // For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
 const fs = require('fs');
 const readline = require('readline');
-const { google } = require('googleapis');
+const {
+  google
+} = require('googleapis');
 
 const SCOPES = ['https://www.googleapis.com/auth/drive'];
 const TOKEN_PATH = 'credentials.json';
@@ -19,6 +21,7 @@ module.exports = function (options = {}) {
 
     image = data;
 
+
     fs.readFile('client_secret.json', (err, content) => {
       if (err) return console.log('Error loading client secret file:', err);
       // Authorize a client with credentials, then call the Google Drive API.
@@ -30,7 +33,11 @@ module.exports = function (options = {}) {
 };
 
 function authorize(credentials, callback) {
-  const { client_secret, client_id, redirect_uris } = credentials.installed;
+  const {
+    client_secret,
+    client_id,
+    redirect_uris
+  } = credentials.installed;
   const oAuth2Client = new google.auth.OAuth2(
     client_id, client_secret, redirect_uris[0]);
 
@@ -69,7 +76,10 @@ function getAccessToken(oAuth2Client, callback, data) {
 }
 
 function createFiles(auth) {
-  const drive = google.drive({ version: 'v3', auth });
+  const drive = google.drive({
+    version: 'v3',
+    auth
+  });
 
   var fileMetadata = {
     'name': image.name
@@ -89,7 +99,12 @@ function createFiles(auth) {
       // Handle error
       console.error(err);
     } else {
-      console.log('File Id: ', file.id);
+      console.log('File Id: ', file.data.id);
+      image.googleDrivePath = 'https://docs.google.com/uc?id=' + file.data.id;
     }
   });
+}
+
+async function main(data) {
+
 }

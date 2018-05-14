@@ -17,6 +17,7 @@ const languages = require('./languages/languages.service.js');
 const images = require('./images/images.service.js');
 const uploads = require('./uploads/uploads.service.js');
 const googleDrive = require('./google-drive/google-drive.service.js');
+const oauth = require('./oauth/oauth.service.js');
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   app.configure(users);
@@ -38,4 +39,5 @@ module.exports = function (app) {
   app.configure(images);
   app.configure(uploads);
   app.configure(googleDrive);
+  app.configure(oauth);
 };

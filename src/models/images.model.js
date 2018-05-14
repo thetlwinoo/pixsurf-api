@@ -50,6 +50,10 @@ module.exports = function (app) {
     exclude: {
       type: Boolean,
       default: false
+    },
+    googleDrivePath: {
+      type: String,
+      default: ''
     }
   }, {
     timestamps: true

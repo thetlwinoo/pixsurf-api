@@ -25,7 +25,7 @@ module.exports = function (options = {}) {
       throw new Error('Upload image failed');
     }
 
-    context.data = {
+    const transform = {
       name: data.name,
       type: data.type,
       path: data.path,
@@ -37,9 +37,15 @@ module.exports = function (options = {}) {
       isBaseImage: data.isBaseImage,
       isSmallImage: data.isSmallImage,
       isThumbnail: data.isThumbnail,
-      exclude: data.exclude
+      exclude: data.exclude,
+      googleDrivePath: ''
     }
 
+    const googleDrivePath = await app.service('google-drive').create(transform);    
+
+    console.log('upload',googleDrivePath)
+
+    context.data = transform;
     return context;
   };
 };

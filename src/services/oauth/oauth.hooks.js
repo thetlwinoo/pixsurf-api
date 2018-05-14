@@ -1,21 +1,11 @@
-const {
-  authenticate
-} = require('@feathersjs/authentication').hooks;
+const { authenticate } = require('@feathersjs/authentication').hooks;
 
 module.exports = {
   before: {
-    all: [authenticate('jwt')],
+    all: [ authenticate('jwt') ],
     find: [],
     get: [],
-    create: [
-      function (hook) {
-        if (!hook.data.uri) {
-          hook.data = {
-            uri: hook.data.tempPath
-          };
-        }
-      }
-    ],
+    create: [],
     update: [],
     patch: [],
     remove: []
