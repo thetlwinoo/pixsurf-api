@@ -4,16 +4,9 @@ const fs = require('fs');
 const readline = require('readline');
 const { google } = require('googleapis');
 
-const oauth2Client = new google.auth.OAuth2(
-  '254051480224-1rikk2jbbm3rddjqk2gfsiat14sf6upb.apps.googleusercontent.com',
-  '2sTraeDXWMDVp3ChGe346Nfh',
-  ["urn:ietf:wg:oauth:2.0:oob", "http://localhost"]
-);
-
-const drive = google.drive({
-  version: 'v3',
-  auth: oauth2Client
-});
+const SCOPES = ['https://www.googleapis.com/auth/drive'];
+const TOKEN_PATH = 'credentials.json';
+image = {};
 // eslint-disable-next-line no-unused-vars
 module.exports = function (options = {}) {
   return async context => {
@@ -24,28 +17,69 @@ module.exports = function (options = {}) {
       params
     } = context;
 
-    if (!data.uri) {
-      throw new Error('A image must have a uri');
-    }
+    image = data;
 
-    const uri = data.uri;
-
-    var fileMetadata = {
-      'name': data.name
-    };
-    var media = {
-      mimeType: data.type,
-      body: data.uri
-    };
-
-    main(fileMetadata, media).catch(console.error);
+    fs.readFile('client_secret.json', (err, content) => {
+      if (err) return console.log('Error loading client secret file:', err);
+      // Authorize a client with credentials, then call the Google Drive API.
+      authorize(JSON.parse(content), createFiles);
+    });
 
     return context;
   };
 };
 
-async function main(fileMetadata, media) {
-  // console.log(drive)
+function authorize(credentials, callback) {
+  const { client_secret, client_id, redirect_uris } = credentials.installed;
+  const oAuth2Client = new google.auth.OAuth2(
+    client_id, client_secret, redirect_uris[0]);
+
+  // Check if we have previously stored a token.
+  fs.readFile(TOKEN_PATH, (err, token) => {
+    if (err) return getAccessToken(oAuth2Client, callback);
+    oAuth2Client.setCredentials(JSON.parse(token));
+    callback(oAuth2Client);
+  });
+
+}
+
+function getAccessToken(oAuth2Client, callback, data) {
+  const authUrl = oAuth2Client.generateAuthUrl({
+    access_type: 'offline',
+    scope: SCOPES,
+  });
+  console.log('Authorize this app by visiting this url:', authUrl);
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+  rl.question('Enter the code from that page here: ', (code) => {
+    rl.close();
+    oAuth2Client.getToken(code, (err, token) => {
+      if (err) return callback(err);
+      oAuth2Client.setCredentials(token);
+      // Store the token to disk for later program executions
+      fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
+        if (err) console.error(err);
+        console.log('Token stored to', TOKEN_PATH);
+      });
+      callback(oAuth2Client);
+    });
+  });
+}
+
+function createFiles(auth) {
+  const drive = google.drive({ version: 'v3', auth });
+
+  var fileMetadata = {
+    'name': image.name
+  };
+
+  var media = {
+    mimeType: image.type,
+    body: fs.createReadStream(image.tempPath)
+  };
+
   drive.files.create({
     resource: fileMetadata,
     media: media,
@@ -59,5 +93,3 @@ async function main(fileMetadata, media) {
     }
   });
 }
-
-// 

@@ -28,7 +28,8 @@ module.exports = function (options = {}) {
     context.data = {
       name: data.name,
       type: data.type,
-      path: data.path + 'uploads/' + uploadedImage.id,
+      path: data.path,
+      tempPath: '/uploads/' + uploadedImage.id,
       size: uploadedImage.size,
       width: data.width,
       height: data.height,

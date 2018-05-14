@@ -4,7 +4,7 @@ const fs = require('fs');
 const readline = require('readline');
 const { google } = require('googleapis');
 
-const SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
+const SCOPES = ['https://www.googleapis.com/auth/drive'];
 const TOKEN_PATH = 'credentials.json';
 image = {};
 // eslint-disable-next-line no-unused-vars
@@ -93,10 +93,12 @@ function createFiles(auth) {
   var fileMetadata = {
     'name': image.name
   };
+
   var media = {
     mimeType: image.type,
-    body: image.uri
+    body: fs.createReadStream('/uploads/' + image.name)
   };
+
   drive.files.create({
     resource: fileMetadata,
     media: media,
