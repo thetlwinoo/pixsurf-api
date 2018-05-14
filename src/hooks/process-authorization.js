@@ -4,7 +4,7 @@ const fs = require('fs');
 const readline = require('readline');
 const { google } = require('googleapis');
 
-const SCOPES = ['https://www.googleapis.com/auth/drive'];
+const SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
 const TOKEN_PATH = 'credentials.json';
 image = {};
 // eslint-disable-next-line no-unused-vars
@@ -22,7 +22,7 @@ module.exports = function (options = {}) {
     fs.readFile('client_secret.json', (err, content) => {
       if (err) return console.log('Error loading client secret file:', err);
       // Authorize a client with credentials, then call the Google Drive API.
-      authorize(JSON.parse(content), createFiles);
+      authorize(JSON.parse(content), listFiles);
     });
 
     return context;

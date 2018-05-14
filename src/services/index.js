@@ -16,8 +16,7 @@ const supplierCategories = require('./supplier-categories/supplier-categories.se
 const languages = require('./languages/languages.service.js');
 const images = require('./images/images.service.js');
 const uploads = require('./uploads/uploads.service.js');
-const googleDrive = require('./google-drive/google-drive.service.js');
-const oauth = require('./oauth/oauth.service.js');
+const gclient = require('./gclient/gclient.service.js');
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   app.configure(users);
@@ -38,6 +37,5 @@ module.exports = function (app) {
   app.configure(languages);
   app.configure(images);
   app.configure(uploads);
-  app.configure(googleDrive);
-  app.configure(oauth);
+  app.configure(gclient);
 };
