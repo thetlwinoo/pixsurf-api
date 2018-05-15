@@ -17,7 +17,9 @@ module.exports = function (options = {}) {
 
     const uri = data.uri;
 
-    const uploadedImage = await app.service('uploads').create({uri});
+    const uploadedImage = await app.service('uploads').create({
+      uri
+    });
 
     // const uri = context.data.uri;
 
@@ -25,7 +27,7 @@ module.exports = function (options = {}) {
       throw new Error('Upload image failed');
     }
 
-    const transform = {
+    context.data = {
       name: data.name,
       type: data.type,
       path: data.path,
@@ -39,13 +41,8 @@ module.exports = function (options = {}) {
       isThumbnail: data.isThumbnail,
       exclude: data.exclude,
       googleDrivePath: ''
-    }
-
-    const googleDrivePath = await app.service('google-drive').create(transform);    
-
-    console.log('upload',googleDrivePath)
-
-    context.data = transform;
+    };
+    
     return context;
   };
 };

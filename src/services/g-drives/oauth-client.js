@@ -1,79 +1,109 @@
-// Copyright 2016, Google, Inc.
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//    http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+const fs = require('fs');
+const readline = require('readline');
+const {
+  google
+} = require('googleapis');
 
-'use strict';
+const SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
+const TOKEN_PATH = 'credentials.json';
 
-/**
- * This is used by several samples to easily provide an oauth2 workflow.
- */
-
-const { google } = require('googleapis');
 const http = require('http');
 const url = require('url');
 const querystring = require('querystring');
 const opn = require('opn');
 const destroyer = require('server-destroy');
-const fs = require('fs');
-const path = require('path');
-
-const keyPath = path.join(__dirname, 'oauth2.keys.json');
-let keys = { redirect_uris: [''] };
-if (fs.existsSync(keyPath)) {
-    keys = require(keyPath).web;
-}
 
 class OAuthClient {
-    constructor(options) {
-        this._options = options || { scopes: [] };
+  constructor(options) {
+    this._options = options || {
+      scopes: []
+    };
+  }
 
-        // create an oAuth client to authorize the API call
-        this.oAuth2Client = new google.auth.OAuth2(
-            keys.client_id,
-            keys.client_secret,
-            keys.redirect_uris[0]
-        );
-    }
+  async authenticate(scopes) {
+    return new Promise((resolve, reject) => {
+      fs.readFile('oauth2.keys.json', (err, content) => {
+        if (err) return console.log('Error loading client secret file:', err);
+        // Authorize a client with credentials, then call the Google Drive API.
+        this.authorize(JSON.parse(content))
+          .then(c => resolve(c))
+          .catch(err => reject(err));
+      });
+    });
+  }
 
-    // Open an http server to accept the oauth callback. In this
-    // simple example, the only request to our webserver is to
-    // /oauth2callback?code=<code>
-    async authenticate(scopes) {
-        return new Promise((resolve, reject) => {
-            // grab the url that will be used for authorization
-            this.authorizeUrl = this.oAuth2Client.generateAuthUrl({
-                access_type: 'offline',
-                scope: scopes.join(' ')
-            });
-            const server = http.createServer(async (req, res) => {
-                try {
-                    if (req.url.indexOf('/oauth2callback') > -1) {
-                        const qs = querystring.parse(url.parse(req.url).query);
-                        res.end('Authentication successful! Please return to the console.');
-                        server.destroy();
-                        const { tokens } = await this.oAuth2Client.getToken(qs.code);
-                        this.oAuth2Client.credentials = tokens;
-                        resolve(this.oAuth2Client);
-                    }
-                } catch (e) {
-                    reject(e);
-                }
-            }).listen(3000, () => {
-                // open the browser to the authorize url to start the workflow
-                opn(this.authorizeUrl, { wait: false }).then(cp => cp.unref());
-            });
-            destroyer(server);
+  authorize(credentials) {
+    return new Promise((resolve, reject) => {
+      const {
+        client_secret,
+        client_id,
+        redirect_uris
+      } = credentials.web;
+      const oAuth2Client = new google.auth.OAuth2(
+        client_id, client_secret, redirect_uris[0]);
+      // Check if we have previously stored a token.
+      fs.readFile(TOKEN_PATH, (err, token) => {
+        if (err) return this.getAccessToken(oAuth2Client);
+        oAuth2Client.setCredentials(JSON.parse(token));
+        resolve(oAuth2Client)
+      });
+    });
+  }
+
+  getAccessToken(oAuth2Client) {
+    return new Promise((resolve, reject) => {
+      const authUrl = oAuth2Client.generateAuthUrl({
+        access_type: 'offline',
+        scope: SCOPES,
+      });
+      //   console.log('Authorize this app by visiting this url:', authUrl);
+      //   const rl = readline.createInterface({
+      //     input: process.stdin,
+      //     output: process.stdout,
+      //   });
+
+      //   rl.question('Enter the code from that page here: ', (code) => {
+      //     rl.close();
+      //     oAuth2Client.getToken(code, (err, token) => {
+      //       if (err) reject(err);
+      //       oAuth2Client.setCredentials(token);
+      //       // Store the token to disk for later program executions
+      //       fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
+      //         if (err) console.error(err);
+      //         console.log('Token stored to', TOKEN_PATH);
+      //       });
+      //       resolve(oAuth2Client);
+      //     });
+      //   });
+      opn(authUrl, {
+        wait: false
+      }).then(cp => cp.unref());
+    });
+  }
+
+  listFiles(auth) {
+    const drive = google.drive({
+      version: 'v3',
+      auth
+    });
+    drive.files.list({
+      pageSize: 10,
+      fields: 'nextPageToken, files(id, name)',
+    }, (err, {
+      data
+    }) => {
+      if (err) return console.log('The API returned an error: ' + err);
+      const files = data.files;
+      if (files.length) {
+        console.log('Files:');
+        files.map((file) => {
+          console.log(`${file.name} (${file.id})`);
         });
-    }
+      } else {
+        console.log('No files found.');
+      }
+    });
+  }
 }
 
 module.exports = new OAuthClient();

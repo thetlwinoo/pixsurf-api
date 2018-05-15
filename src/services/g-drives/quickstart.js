@@ -20,15 +20,15 @@ const opn = require('opn');
 const path = require('path');
 const fs = require('fs');
 
-const keyfile = path.join(__dirname, 'credentials.json');
+const keyfile = path.join(__dirname, 'oauth2.keys.json');
 const keys = JSON.parse(fs.readFileSync(keyfile));
 const scopes = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
 
 // Create an oAuth2 client to authorize the API call
 const client = new google.auth.OAuth2(
-    keys.web.client_id,
-    keys.web.client_secret,
-    keys.web.redirect_uris[0]
+    keys.installed.client_id,
+    keys.installed.client_secret,
+    keys.installed.redirect_uris[0]
 );
 
 // Generate the url that will be used for authorization

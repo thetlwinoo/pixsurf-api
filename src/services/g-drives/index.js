@@ -1,11 +1,11 @@
 const hooks = require('./hooks');
 const service = require('./service');
-const download = require('./download');
-const exportpdf = require('./export-pdf');
-const list = require('./export-pdf');
+// const download = require('./download');
+// const exportpdf = require('./export-pdf');
+// const list = require('./export-pdf');
 const oauthclient = require('./oauth-client');
-const quickstart = require('./quickstart');
+// const quickstart = require('./quickstart');
 
-Object.assign(service, { hooks, service, download, exportpdf, list, oauthclient, quickstart });
+Object.assign(service, { hooks, service, oauthclient });
 
 module.exports = service;
