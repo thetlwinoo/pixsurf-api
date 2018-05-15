@@ -1,0 +1,11 @@
+{
+  "installed": {
+    "client_id": "254051480224-d17lprfu9k531j86f5sb2oh9flc8ug0s.apps.googleusercontent.com",
+    "project_id": "automatic-time-203918",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://accounts.google.com/o/oauth2/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret": "CfcjxsOP5mWv2AFcZiNUs7V0",
+    "redirect_uris": ["urn:ietf:wg:oauth:2.0:oob", "http://localhost"]
+  }
+}
