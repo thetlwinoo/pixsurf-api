@@ -31,6 +31,7 @@ class Service {
 
   async find(params) {
     const code = params.query.code;
+    console.log('code',code)
     return new Promise((resolve, reject) => {
       if (!code) reject('No code found');
       client.getToken(code, (err, tokens) => {

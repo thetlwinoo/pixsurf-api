@@ -13,7 +13,7 @@ const destroyer = require('server-destroy');
 const fs = require('fs');
 const path = require('path');
 
-const keyPath = path.join(__dirname, 'oauth2.keys.json');
+const keyPath = path.join(__dirname, 'client_secret.json');
 let keys = { redirect_uris: [''] };
 if (fs.existsSync(keyPath)) {
   keys = require(keyPath).web;
