@@ -22,7 +22,7 @@ class OAuthClient {
 
   async authenticate(scopes) {
     return new Promise((resolve, reject) => {
-      fs.readFile('oauth2.keys.json', (err, content) => {
+      fs.readFile('client_secret.json', (err, content) => {
         if (err) return console.log('Error loading client secret file:', err);
         // Authorize a client with credentials, then call the Google Drive API.
         this.authorize(JSON.parse(content), scopes)
