@@ -7,7 +7,7 @@ const opn = require('opn');
 const path = require('path');
 const fs = require('fs');
 
-const keyPath = path.join(__dirname, 'oauth2.keys.json');
+const keyPath = path.join(__dirname, 'client_secret.json');
 let keys = {
   redirect_uris: ['']
 };

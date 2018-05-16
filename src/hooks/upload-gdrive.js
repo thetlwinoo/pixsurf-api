@@ -74,7 +74,7 @@ async function createFiles(auth, data) {
     }, function (err, file) {
       if (err) {
         // Handle error
-        // console.log('errrrrrrrrrrrr',err)
+        console.log('errrrrrrrrrrrr',err)
         reject(err)
       } else {
         resolve({
