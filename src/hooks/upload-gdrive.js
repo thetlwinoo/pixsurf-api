@@ -7,10 +7,7 @@ const fs = require('fs');
 const {
   oauthclient
 } = require('../services/g-drives');
-const drive = google.drive({
-  version: 'v3',
-  auth: oauthclient.oAuth2Client
-});
+
 // eslint-disable-next-line no-unused-vars
 module.exports = function (options = {}) {
   return async context => {
@@ -22,37 +19,67 @@ module.exports = function (options = {}) {
     } = context;
 
     const fileName = data.tempPath;
-    const scopes = ['https://www.googleapis.com/auth/drive.file'];
-    oauthclient.authenticate(scopes)
-      .then(c => {
-        console.log('return',c)
-        // uploadGdrive(fileName)
-      })
-      .catch(console.error);
+    // const scopes = ['https://www.googleapis.com/auth/drive.file'];
+    return authenticate(fileName).then(v => {
+      context.data = {
+        name: data.name,
+        type: data.type,
+        size: data.size,
+        width: data.width,
+        height: data.height,
+        stockItemId: data.stockItemId,
+        isBaseImage: data.isBaseImage,
+        isSmallImage: data.isSmallImage,
+        isThumbnail: data.isThumbnail,
+        exclude: data.exclude,
+        fileId: v.fileId
+      };
 
-    return context;
+      return context;
+    })
   };
 };
 
-async function uploadGdrive(fileName) {
-  const fileSize = fs.statSync(fileName).size;
-  const res = await drive.files.create({
-    requestBody: {
-      // a requestBody element is required if you want to use multipart
-    },
-    media: {
-      body: fs.createReadStream(fileName)
-    }
-  }, {
-    // Use the `onUploadProgress` event from Axios to track the
-    // number of bytes uploaded to this point.
-    onUploadProgress: evt => {
-      const progress = (evt.bytesRead / fileSize) * 100;
-      process.stdout.clearLine();
-      process.stdout.cursorTo(0);
-      process.stdout.write(`${Math.round(progress)}% complete`);
-    }
+async function authenticate(fileName) {
+  return new Promise((resolve, reject) => {
+    oauthclient.authenticate()
+      .then(auth => {
+        createFiles(auth, fileName).then(v => resolve(v))
+      })
+      .catch(e => reject(e));
   });
-  console.log(res.data);
-  return res.data;
+}
+
+async function createFiles(auth, fileName) {
+  return new Promise((resolve, reject) => {
+    const drive = google.drive({
+      version: 'v3',
+      auth
+    });
+
+    var fileMetadata = {
+      'name': 'Testing.gif'
+    };
+
+    var media = {
+      mimeType: 'image/gif',
+      body: fs.createReadStream(fileName)
+    };
+
+    drive.files.create({
+      resource: fileMetadata,
+      media: media,
+      fields: 'id'
+    }, function (err, file) {
+      if (err) {
+        // Handle error
+        reject(err)
+      } else {
+        resolve({
+          fileId: file.data.id
+        })
+      }
+    });
+  });
+
 }

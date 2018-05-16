@@ -6,7 +6,7 @@ const {
   google
 } = require('googleapis');
 
-const SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
+const SCOPES = ['https://www.googleapis.com/auth/drive'];
 const TOKEN_PATH = 'credentials.json';
 image = {};
 // eslint-disable-next-line no-unused-vars
@@ -20,18 +20,16 @@ module.exports = function (options = {}) {
     } = context;
 
     image = data;
+console.log(image)
+    fs.readFile('client_secret.json', (err, content) => {
+      if (err) return console.log('Error loading client secret file:', err);
+      // Authorize a client with credentials, then call the Google Drive API.
+      authorize(JSON.parse(content), createFiles);
+    });
 
     return context;
   };
 };
-
-async function authenticate(scopes) {
-  fs.readFile('client_secret.json', (err, content) => {
-    if (err) return console.log('Error loading client secret file:', err);
-    // Authorize a client with credentials, then call the Google Drive API.
-    authorize(JSON.parse(content), listFiles);
-  });
-}
 
 function authorize(credentials, callback) {
   const {
@@ -76,7 +74,7 @@ function getAccessToken(oAuth2Client, callback) {
   });
 }
 
-function listFiles(auth) {
+function listFiles(auth) {  
   const drive = google.drive({
     version: 'v3',
     auth
@@ -100,31 +98,32 @@ function listFiles(auth) {
   });
 }
 
-// function createFiles(auth) {
-//   const drive = google.drive({
-//     version: 'v3',
-//     auth
-//   });
+function createFiles(auth) {
+  console.log(auth)
+  const drive = google.drive({
+    version: 'v3',
+    auth
+  });
 
-//   var fileMetadata = {
-//     'name': image.name
-//   };
+  var fileMetadata = {
+    'name': image.name
+  };
 
-//   var media = {
-//     mimeType: image.type,
-//     body: fs.createReadStream('/uploads/' + image.name)
-//   };
+  var media = {
+    mimeType: image.type,
+    body: fs.createReadStream(image.tempPath)
+  };
 
-//   drive.files.create({
-//     resource: fileMetadata,
-//     media: media,
-//     fields: 'id'
-//   }, function (err, file) {
-//     if (err) {
-//       // Handle error
-//       console.error(err);
-//     } else {
-//       console.log('File Id: ', file.id);
-//     }
-//   });
-// }
+  drive.files.create({
+    resource: fileMetadata,
+    media: media,
+    fields: 'id'
+  }, function (err, file) {
+    if (err) {
+      // Handle error
+      console.error(err);
+    } else {
+      console.log('File Id: ', file.id);
+    }
+  });
+}

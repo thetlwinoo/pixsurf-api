@@ -4,6 +4,7 @@ const service = require('./service');
 // const exportpdf = require('./export-pdf');
 // const list = require('./export-pdf');
 const oauthclient = require('./oauth-client');
+// const oauthclient = require('./oauth-client2');
 // const quickstart = require('./quickstart');
 
 Object.assign(service, { hooks, service, oauthclient });

@@ -30,7 +30,6 @@ module.exports = function (options = {}) {
     context.data = {
       name: data.name,
       type: data.type,
-      path: data.path,
       tempPath: '/uploads/' + uploadedImage.id,
       size: uploadedImage.size,
       width: data.width,
@@ -39,10 +38,9 @@ module.exports = function (options = {}) {
       isBaseImage: data.isBaseImage,
       isSmallImage: data.isSmallImage,
       isThumbnail: data.isThumbnail,
-      exclude: data.exclude,
-      googleDrivePath: ''
+      exclude: data.exclude
     };
-    
+
     return context;
   };
 };

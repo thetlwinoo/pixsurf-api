@@ -4,7 +4,7 @@ const {
   google
 } = require('googleapis');
 
-const SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
+const SCOPES = ['https://www.googleapis.com/auth/drive'];
 const TOKEN_PATH = 'credentials.json';
 
 const http = require('http');
@@ -25,14 +25,14 @@ class OAuthClient {
       fs.readFile('oauth2.keys.json', (err, content) => {
         if (err) return console.log('Error loading client secret file:', err);
         // Authorize a client with credentials, then call the Google Drive API.
-        this.authorize(JSON.parse(content))
+        this.authorize(JSON.parse(content), scopes)
           .then(c => resolve(c))
           .catch(err => reject(err));
       });
     });
   }
 
-  authorize(credentials) {
+  authorize(credentials, scopes) {
     return new Promise((resolve, reject) => {
       const {
         client_secret,
@@ -43,18 +43,18 @@ class OAuthClient {
         client_id, client_secret, redirect_uris[0]);
       // Check if we have previously stored a token.
       fs.readFile(TOKEN_PATH, (err, token) => {
-        if (err) return this.getAccessToken(oAuth2Client);
+        if (err) return this.getAccessToken(oAuth2Client, scopes);
         oAuth2Client.setCredentials(JSON.parse(token));
         resolve(oAuth2Client)
       });
     });
   }
 
-  getAccessToken(oAuth2Client) {
+  getAccessToken(oAuth2Client, scopes) {
     return new Promise((resolve, reject) => {
       const authUrl = oAuth2Client.generateAuthUrl({
         access_type: 'offline',
-        scope: SCOPES,
+        scope: SCOPES
       });
       //   console.log('Authorize this app by visiting this url:', authUrl);
       //   const rl = readline.createInterface({
@@ -76,8 +76,10 @@ class OAuthClient {
       //     });
       //   });
       opn(authUrl, {
-        wait: false
-      }).then(cp => cp.unref());
+          wait: false
+        })
+        .then(cp => cp.unref())
+        .catch(err => reject(err))
     });
   }
 

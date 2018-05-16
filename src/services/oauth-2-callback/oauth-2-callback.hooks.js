@@ -25,7 +25,7 @@ module.exports = {
     all: [],
     find: [
       function (hook) {
-        if(hook.data){
+        if (hook.data) {
           console.log(hook.data)
         }
       }
