@@ -18,9 +18,9 @@ module.exports = function (options = {}) {
       params
     } = context;
 
-    const fileName = data.tempPath;
     // const scopes = ['https://www.googleapis.com/auth/drive.file'];
-    return authenticate(fileName).then(v => {
+    return authenticate(data).then(v => {
+      console.log('vvvvc',v)
       context.data = {
         name: data.name,
         type: data.type,
@@ -40,17 +40,18 @@ module.exports = function (options = {}) {
   };
 };
 
-async function authenticate(fileName) {
+async function authenticate(data) {  
   return new Promise((resolve, reject) => {
     oauthclient.authenticate()
       .then(auth => {
-        createFiles(auth, fileName).then(v => resolve(v))
+        createFiles(auth, data).then(v => resolve(v))
       })
       .catch(e => reject(e));
   });
 }
 
-async function createFiles(auth, fileName) {
+async function createFiles(auth, data) {
+  console.log('auth',auth)
   return new Promise((resolve, reject) => {
     const drive = google.drive({
       version: 'v3',
@@ -58,12 +59,12 @@ async function createFiles(auth, fileName) {
     });
 
     var fileMetadata = {
-      'name': 'Testing.gif'
+      'name': data.name
     };
 
     var media = {
-      mimeType: 'image/gif',
-      body: fs.createReadStream(fileName)
+      mimeType: data.type,
+      body: fs.createReadStream(data.tempPath)
     };
 
     drive.files.create({
@@ -73,6 +74,7 @@ async function createFiles(auth, fileName) {
     }, function (err, file) {
       if (err) {
         // Handle error
+        // console.log('errrrrrrrrrrrr',err)
         reject(err)
       } else {
         resolve({
