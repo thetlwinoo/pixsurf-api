@@ -43,7 +43,13 @@ module.exports = function (options = {}) {
       opn(authorizeUrl, {
         wait: false
       }).then(cp => cp.unref());
-      throw new Error('Not Authenticate and try again!');
+      
+      const error = {
+        message: 'Authorize this app by visiting this url:',
+        oauthUrl: authorizeUrl
+      }
+
+      throw new Error(error);
     }
 
     client.setCredentials(credentials);

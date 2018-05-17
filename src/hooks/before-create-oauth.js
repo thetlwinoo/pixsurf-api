@@ -30,7 +30,6 @@ module.exports = function (options = {}) {
           credentials: v.credentials
         }
 
-        console.log(context.data)
         return context;
       })
       .catch(err => {
