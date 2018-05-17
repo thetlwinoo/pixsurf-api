@@ -5,13 +5,15 @@ const processUpload = require('../../hooks/process-upload');
 const processAuthorize = require('../../hooks/process-authorization');
 const processDriveUpload = require('../../hooks/process-drive-upload');
 const uploadGdrive = require('../../hooks/upload-gdrive');
+const googleAuth = require('../../hooks/google-auth');
+const afterCreateImage = require('../../hooks/after-create-image');
 
 module.exports = {
   before: {
     all: [authenticate('jwt')],
     find: [],
     get: [],
-    create: [processUpload(), uploadGdrive()],
+    create: [processUpload(), googleAuth(), uploadGdrive()],
     update: [],
     patch: [],
     remove: []
@@ -21,7 +23,7 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [],
+    create: [afterCreateImage()],
     update: [],
     patch: [],
     remove: []

@@ -18,40 +18,27 @@ module.exports = function (options = {}) {
       params
     } = context;
 
-    // const scopes = ['https://www.googleapis.com/auth/drive.file'];
-    return authenticate(data).then(v => {
-      console.log('vvvvc',v)
-      context.data = {
-        name: data.name,
-        type: data.type,
-        size: data.size,
-        width: data.width,
-        height: data.height,
-        stockItemId: data.stockItemId,
-        isBaseImage: data.isBaseImage,
-        isSmallImage: data.isSmallImage,
-        isThumbnail: data.isThumbnail,
-        exclude: data.exclude,
-        fileId: v.fileId
-      };
+    const config = app.get('client_secret');
+    const keys = config.web;
 
-      return context;
-    })
+    const client = new google.auth.OAuth2(
+      keys.client_id,
+      keys.client_secret,
+      keys.redirect_uris[0]
+    );
+
+    if (context.data.authenticate) {
+      client.setCredentials(context.data.credentials);
+      const createAuth =await createFiles(client, context.data)
+      context.data.fileId = createAuth.fileId;
+      console.log('createAuth',createAuth)
+    }
+    return context;
   };
 };
 
-async function authenticate(data) {  
-  return new Promise((resolve, reject) => {
-    oauthclient.authenticate()
-      .then(auth => {
-        createFiles(auth, data).then(v => resolve(v))
-      })
-      .catch(e => reject(e));
-  });
-}
-
 async function createFiles(auth, data) {
-  console.log('auth',auth)
+  // console.log('auth', auth)
   return new Promise((resolve, reject) => {
     const drive = google.drive({
       version: 'v3',
@@ -74,7 +61,7 @@ async function createFiles(auth, data) {
     }, function (err, file) {
       if (err) {
         // Handle error
-        console.log('errrrrrrrrrrrr',err)
+        console.log('errrrrrrrrrrrr', err)
         reject(err)
       } else {
         resolve({

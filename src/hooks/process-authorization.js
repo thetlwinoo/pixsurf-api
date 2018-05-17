@@ -24,7 +24,7 @@ console.log(image)
     fs.readFile('client_secret.json', (err, content) => {
       if (err) return console.log('Error loading client secret file:', err);
       // Authorize a client with credentials, then call the Google Drive API.
-      authorize(JSON.parse(content), createFiles);
+      authorize(JSON.parse(content), listFiles);
     });
 
     return context;
@@ -75,6 +75,7 @@ function getAccessToken(oAuth2Client, callback) {
 }
 
 function listFiles(auth) {  
+  console.log('Authhhhhhh',auth)
   const drive = google.drive({
     version: 'v3',
     auth

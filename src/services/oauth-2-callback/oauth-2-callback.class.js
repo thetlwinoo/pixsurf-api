@@ -40,11 +40,11 @@ class Service {
         }
         client.setCredentials(tokens);
 
-        fs.writeFile(TOKEN_PATH, JSON.stringify(tokens), (err) => {
-          if (err) console.error(err);
-          console.log('Token stored to', TOKEN_PATH);
-          resolve(client)
-        });
+        // fs.writeFile(TOKEN_PATH, JSON.stringify(tokens), (err) => {
+        //   if (err) console.error(err);
+        //   console.log('Token stored to', TOKEN_PATH);
+        //   resolve(client)
+        // });
       });
     });
 
