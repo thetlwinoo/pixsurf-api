@@ -43,13 +43,8 @@ module.exports = function (options = {}) {
       opn(authorizeUrl, {
         wait: false
       }).then(cp => cp.unref());
-      
-      const error = {
-        message: 'Authorize this app by visiting this url:',
-        oauthUrl: authorizeUrl
-      }
 
-      throw new Error(error);
+      throw new Error('error:' + authorizeUrl);
     }
 
     client.setCredentials(credentials);
