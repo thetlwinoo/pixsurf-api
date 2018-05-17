@@ -44,7 +44,7 @@ module.exports = function (options = {}) {
         wait: false
       }).then(cp => cp.unref());
 
-      throw new Error('url:' + authorizeUrl);
+      throw new Error(authorizeUrl);
     }
 
     client.setCredentials(credentials);
