@@ -44,7 +44,7 @@ module.exports = function (options = {}) {
         wait: false
       }).then(cp => cp.unref());
 
-      throw new Error('error:' + authorizeUrl);
+      throw new Error('url:' + authorizeUrl);
     }
 
     client.setCredentials(credentials);
@@ -57,7 +57,7 @@ module.exports = function (options = {}) {
       .catch(err => {
         if (oauth && oauth.data) {
           app.service('oauth').remove(oauth.data[0]._id);
-        }
+        }        
         throw new Error('Google Drive Authentication Failed.')
       })
     // return context;
