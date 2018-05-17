@@ -11,7 +11,6 @@ module.exports = function (options = {}) {
     //   data,
     //   params
     // } = context;
-    console.log(context)
     // if (!context) throw new Error('Create Image Failed!');
     // if (context.data.error) throw new Error(context.data.error);
     return context;
