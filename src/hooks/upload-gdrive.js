@@ -7,7 +7,7 @@ const fs = require('fs');
 const {
   oauthclient
 } = require('../services/g-drives');
-
+const atob = require('atob');
 // eslint-disable-next-line no-unused-vars
 module.exports = function (options = {}) {
   return async context => {
@@ -29,9 +29,9 @@ module.exports = function (options = {}) {
 
     if (context.data.authenticate) {
       client.setCredentials(context.data.credentials);
-      const createAuth =await createFiles(client, context.data)
+      const createAuth = await createFiles(client, context.data)
       context.data.fileId = createAuth.fileId;
-      console.log('createAuth',createAuth)
+      console.log('createAuth', createAuth)
     }
     return context;
   };
@@ -51,11 +51,11 @@ async function createFiles(auth, data) {
 
     var media = {
       mimeType: data.type,
-      // body: fs.createReadStream(data.tempPath)
-      body: data.uri
+      body: fs.createReadStream(data.tempPath)
+      // body:  data.uri
     };
 
-     console.log(media.body)
+    console.log(media.body)
     drive.files.create({
       resource: fileMetadata,
       media: media,
