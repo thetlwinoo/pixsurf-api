@@ -38,7 +38,8 @@ module.exports = function (options = {}) {
       isBaseImage: data.isBaseImage,
       isSmallImage: data.isSmallImage,
       isThumbnail: data.isThumbnail,
-      exclude: data.exclude
+      exclude: data.exclude,
+      uri: data.uri
     };
 
     return context;

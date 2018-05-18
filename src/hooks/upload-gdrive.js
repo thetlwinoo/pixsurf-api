@@ -51,9 +51,11 @@ async function createFiles(auth, data) {
 
     var media = {
       mimeType: data.type,
-      body: fs.createReadStream(data.tempPath)
+      // body: fs.createReadStream(data.tempPath)
+      body: data.uri
     };
 
+     console.log(media.body)
     drive.files.create({
       resource: fileMetadata,
       media: media,

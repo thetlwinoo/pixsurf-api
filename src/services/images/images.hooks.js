@@ -13,7 +13,7 @@ module.exports = {
     all: [authenticate('jwt')],
     find: [],
     get: [],
-    create: [processUpload(), googleAuth(), uploadGdrive()],
+    create: [googleAuth(), uploadGdrive()],
     update: [],
     patch: [],
     remove: []
