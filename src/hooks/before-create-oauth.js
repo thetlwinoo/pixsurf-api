@@ -12,7 +12,7 @@ module.exports = function (options = {}) {
     } = context;
     const config = app.get('client_secret');
     const keys = config.web;
-
+    
     if (!data.code) throw new Error('A context must have a code.');
 
     return await generateToken(keys, data.code)

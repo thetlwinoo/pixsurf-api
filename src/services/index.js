@@ -19,6 +19,7 @@ const uploads = require('./uploads/uploads.service.js');
 // const gclient = require('./gclient/gclient.service.js');
 const oauth2Callback = require('./oauth-2-callback/oauth-2-callback.service.js');
 const oauth = require('./oauth/oauth.service.js');
+const oauthAuthenticate = require('./oauth-authenticate/oauth-authenticate.service.js');
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   app.configure(users);
@@ -42,4 +43,5 @@ module.exports = function (app) {
   // app.configure(gclient);
   app.configure(oauth2Callback);
   app.configure(oauth);
+  app.configure(oauthAuthenticate);
 };
