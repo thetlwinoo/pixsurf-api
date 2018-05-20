@@ -47,14 +47,8 @@ module.exports = function (app) {
       type: Boolean,
       default: false
     },
-<<<<<<< HEAD
     media: {
       type: Schema.Types.ObjectId
-=======
-    fileId: {
-      type: String,
-      default: ''
->>>>>>> d24a0e18ba75c53aa7a156ee7144c7a3b229237f
     }
   }, {
     timestamps: true
