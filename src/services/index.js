@@ -16,7 +16,14 @@ const supplierCategories = require('./supplier-categories/supplier-categories.se
 const languages = require('./languages/languages.service.js');
 const images = require('./images/images.service.js');
 const uploads = require('./uploads/uploads.service.js');
+<<<<<<< HEAD
 const media = require('./media/media.service.js');
+=======
+// const gclient = require('./gclient/gclient.service.js');
+const oauth2Callback = require('./oauth-2-callback/oauth-2-callback.service.js');
+const oauth = require('./oauth/oauth.service.js');
+const oauthAuthenticate = require('./oauth-authenticate/oauth-authenticate.service.js');
+>>>>>>> d24a0e18ba75c53aa7a156ee7144c7a3b229237f
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   app.configure(users);
@@ -37,5 +44,12 @@ module.exports = function (app) {
   app.configure(languages);
   app.configure(images);
   app.configure(uploads);
+<<<<<<< HEAD
   app.configure(media);
+=======
+  // app.configure(gclient);
+  app.configure(oauth2Callback);
+  app.configure(oauth);
+  app.configure(oauthAuthenticate);
+>>>>>>> d24a0e18ba75c53aa7a156ee7144c7a3b229237f
 };

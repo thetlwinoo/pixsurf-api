@@ -21,7 +21,7 @@ module.exports = function (app) {
   app.use('/uploads',
     multipartMiddleware.single('uri'),    
     function (req, res, next) {
-      req.feathers.file = req.file;
+      req.feathers.file = req.file;      
       next();
     },
     blobService({

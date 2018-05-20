@@ -2,9 +2,11 @@
 // For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
 const fs = require('fs');
 const readline = require('readline');
-const { google } = require('googleapis');
+const {
+  google
+} = require('googleapis');
 
-const SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
+const SCOPES = ['https://www.googleapis.com/auth/drive'];
 const TOKEN_PATH = 'credentials.json';
 image = {};
 // eslint-disable-next-line no-unused-vars
@@ -18,7 +20,7 @@ module.exports = function (options = {}) {
     } = context;
 
     image = data;
-
+console.log(image)
     fs.readFile('client_secret.json', (err, content) => {
       if (err) return console.log('Error loading client secret file:', err);
       // Authorize a client with credentials, then call the Google Drive API.
@@ -30,7 +32,11 @@ module.exports = function (options = {}) {
 };
 
 function authorize(credentials, callback) {
-  const { client_secret, client_id, redirect_uris } = credentials.installed;
+  const {
+    client_secret,
+    client_id,
+    redirect_uris
+  } = credentials.installed;
   const oAuth2Client = new google.auth.OAuth2(
     client_id, client_secret, redirect_uris[0]);
 
@@ -43,7 +49,7 @@ function authorize(credentials, callback) {
 
 }
 
-function getAccessToken(oAuth2Client, callback, data) {
+function getAccessToken(oAuth2Client, callback) {
   const authUrl = oAuth2Client.generateAuthUrl({
     access_type: 'offline',
     scope: SCOPES,
@@ -68,12 +74,18 @@ function getAccessToken(oAuth2Client, callback, data) {
   });
 }
 
-function listFiles(auth) {
-  const drive = google.drive({ version: 'v3', auth });
+function listFiles(auth) {  
+  console.log('Authhhhhhh',auth)
+  const drive = google.drive({
+    version: 'v3',
+    auth
+  });
   drive.files.list({
     pageSize: 10,
     fields: 'nextPageToken, files(id, name)',
-  }, (err, { data }) => {
+  }, (err, {
+    data
+  }) => {
     if (err) return console.log('The API returned an error: ' + err);
     const files = data.files;
     if (files.length) {
@@ -88,7 +100,11 @@ function listFiles(auth) {
 }
 
 function createFiles(auth) {
-  const drive = google.drive({ version: 'v3', auth });
+  console.log(auth)
+  const drive = google.drive({
+    version: 'v3',
+    auth
+  });
 
   var fileMetadata = {
     'name': image.name
@@ -96,7 +112,7 @@ function createFiles(auth) {
 
   var media = {
     mimeType: image.type,
-    body: fs.createReadStream('/uploads/' + image.name)
+    body: fs.createReadStream(image.tempPath)
   };
 
   drive.files.create({
