@@ -10,7 +10,9 @@ class Service {
   }
 
   async find(params) {
-    return await this.download(params.query.filename);
+    return await this.download(params.query.filename).catch(err => {
+      return { error: err }
+    });
   }
 
   async get(id, params) {
@@ -25,7 +27,7 @@ class Service {
     }
     const file = data.file;
 
-    console.log('FFile',file)
+    console.log('FFile', file)
     return await this.upload(file)
       .then(v => {
         data = v;
@@ -82,8 +84,10 @@ class Service {
       conn.once('open', () => {
         gfs = Grid(conn.db);
         gfs.files.find({ filename: filename }).toArray((err, files) => {
+
           if (files.length === 0) {
-            reject('File Not Found!')
+            reject('File Not Found!');
+            return false;
           }
 
           let data = [];
@@ -103,6 +107,7 @@ class Service {
 
           readstream.on('error', (err) => {
             reject(err);
+            return false;
           });
 
         });
