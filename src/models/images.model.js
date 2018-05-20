@@ -20,10 +20,6 @@ module.exports = function (app) {
       type: String,
       required: true
     },
-    path: {
-      type: String,
-      required: true
-    },
     size: {
       type: Number,
       required: true
@@ -51,9 +47,8 @@ module.exports = function (app) {
       type: Boolean,
       default: false
     },
-    googleDrivePath: {
-      type: String,
-      default: ''
+    media: {
+      type: Schema.Types.ObjectId
     }
   }, {
     timestamps: true

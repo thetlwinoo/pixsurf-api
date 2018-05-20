@@ -10,7 +10,7 @@ module.exports = {
     all: [authenticate('jwt')],
     find: [],
     get: [],
-    create: [processAuthorize()],
+    create: [processUpload()],
     update: [],
     patch: [],
     remove: []

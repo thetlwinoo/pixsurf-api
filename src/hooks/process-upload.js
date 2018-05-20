@@ -10,42 +10,30 @@ module.exports = function (options = {}) {
       data,
       params
     } = context;
-
-    if (!data.uri) {
-      throw new Error('A image must have a uri');
-    }
-
-    const uri = data.uri;
-
-    const uploadedImage = await app.service('uploads').create({uri});
+    // console.log(context.data)
+    const media = await app.service('media').create({ file: context.params.file });
 
     // const uri = context.data.uri;
-
-    if (!uploadedImage) {
+    console.log('MEDIA',media)
+    if (!media) {
       throw new Error('Upload image failed');
     }
 
-    const transform = {
+    context.data = {
       name: data.name,
       type: data.type,
       path: data.path,
-      tempPath: '/uploads/' + uploadedImage.id,
-      size: uploadedImage.size,
+      media: media._id,
+      size: data.size,
       width: data.width,
       height: data.height,
       stockItemId: data.stockItemId,
       isBaseImage: data.isBaseImage,
       isSmallImage: data.isSmallImage,
       isThumbnail: data.isThumbnail,
-      exclude: data.exclude,
-      googleDrivePath: ''
+      exclude: data.exclude
     }
 
-    const googleDrivePath = await app.service('google-drive').create(transform);    
-
-    console.log('upload',googleDrivePath)
-
-    context.data = transform;
     return context;
   };
 };

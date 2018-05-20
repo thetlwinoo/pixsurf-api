@@ -20,13 +20,11 @@ const channels = require('./channels');
 const authentication = require('./authentication');
 
 const mongoose = require('./mongoose');
-
 // const blobService = require('feathers-blob');
 // const fs = require('fs-blob-store');
 // const blobStorage = fs(__dirname + '/uploads');
 
 const app = express(feathers());
-
 // Load app configuration
 app.configure(configuration());
 // Enable CORS, security, compression, favicon and body parsing
@@ -39,9 +37,12 @@ app.use(favicon(path.join(app.get('public'), 'favicon.ico')));
 // Host the public folder
 app.use('/', express.static(app.get('public')));
 
-app.use(bodyParser.json({limit: '10mb'}));
+app.use(bodyParser.json({ limit: '10mb' }));
 
-app.use(bodyParser.urlencoded({limit: '10mb', extended: true }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
+
+// var gfs = new Grid(mongoUrl);
+// //End Custom Configuration
 
 // Set up Plugins and providers
 app.configure(express.rest());
