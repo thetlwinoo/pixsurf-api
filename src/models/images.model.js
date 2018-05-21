@@ -49,6 +49,10 @@ module.exports = function (app) {
     },
     media: {
       type: Schema.Types.ObjectId
+    },
+    fileName: {
+      type: String,
+      default: ''
     }
   }, {
     timestamps: true
