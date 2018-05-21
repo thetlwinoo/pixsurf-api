@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 const Grid = require('gridfs-stream');
 Grid.mongo = mongoose.mongo;
+const crypto = require('crypto');
+const path = require('path');
 
 class Service {
   constructor(options) {
@@ -35,7 +37,9 @@ class Service {
       return new Error('No File Found!');
     }
 
-    return await this.upload(file)
+    const filename = await this.fileName(file);
+
+    return await this.upload(file, filename)
       .then(v => {
         data = v;
         return data;
@@ -59,7 +63,7 @@ class Service {
     };
   }
 
-  async upload(file) {
+  async upload(file, filename) {
     return new Promise((resolve, reject) => {
       // const gfs = Grid(mongoUrl);      
       const conn = mongoose.createConnection(this.options.mongoUrl);
@@ -70,7 +74,7 @@ class Service {
         gfs = Grid(conn.db);
 
         let writeStream = gfs.createWriteStream({
-          filename: 'img_' + file.originalname,
+          filename: filename,
           mode: 'w',
           content_type: file.mimetype
         });
@@ -83,6 +87,18 @@ class Service {
         writeStream.end();
       })
     });
+  }
+
+  async fileName(file) {
+    return new Promise((resolve, reject) => {
+      return crypto.randomBytes(16, (err, buf) => {
+        if (err) {
+          return reject(err);
+        }
+        const filename = buf.toString('hex') + path.extname(file.originalname);
+        resolve(filename);
+      })
+    })
   }
 
   async download(filename) {

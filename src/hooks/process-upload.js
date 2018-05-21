@@ -24,6 +24,7 @@ module.exports = function (options = {}) {
       type: data.type,
       path: data.path,
       media: media._id,
+      image: media.filename,
       size: data.size,
       width: data.width,
       height: data.height,
