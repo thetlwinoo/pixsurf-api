@@ -76,7 +76,7 @@ class Service {
         let writeStream = gfs.createWriteStream({
           filename: filename,
           mode: 'w',
-          content_type: file.mimetype
+          content_type: file.mimeType
         });
 
         writeStream.on('close', (file) => {
@@ -129,7 +129,6 @@ class Service {
           readstream.on('end', () => {
             data = Buffer.concat(data);
             let img = 'data:' + files[0].contentType + ';base64,' + Buffer(data).toString('base64');
-            console.log(img)
             resolve(img);
           });
 

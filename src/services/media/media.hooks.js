@@ -12,15 +12,16 @@ module.exports = {
       if (hook.params.file) {
         hook.data.file = hook.params.file;
       } else if (hook.data.uri) {
-        toFile(hook.data.uri).then(file => {
+        toFile(hook.data.uri).then(file => {          
           hook.data.file = {
             fieldname: 'file',
             originalname: hook.data.name,
             encoding: file.encoding,
-            mimeType: file.mimeType,
+            mimeType: hook.data.type,
             buffer: file.data,
             size: hook.data.size
           }
+          console.log(hook.data.file)
         });
       }
     }],
