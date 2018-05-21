@@ -1,7 +1,12 @@
+const atob = require('atob');
 const {
   authenticate
 } = require('@feathersjs/authentication').hooks;
-const toFile = require('data-uri-to-file');
+
+const {
+  getBase64DataURI,
+  parseDataURI
+} = require('dauria');
 
 module.exports = {
   before: {
@@ -12,16 +17,15 @@ module.exports = {
       if (hook.params.file) {
         hook.data.file = hook.params.file;
       } else if (hook.data.uri) {
-        toFile(hook.data.uri).then(file => {          
+        uriToFile(hook.data.uri).then(file => {
           hook.data.file = {
             fieldname: 'file',
             originalname: hook.data.name,
-            encoding: file.encoding,
-            mimeType: hook.data.type,
-            buffer: file.data,
+            encoding: 'base64',
+            mimetype: file.mimetype,
+            buffer: file.buffer,
             size: hook.data.size
           }
-          console.log(hook.data.file)
         });
       }
     }],
@@ -50,3 +54,19 @@ module.exports = {
     remove: []
   }
 };
+
+function uriToFile(uri) {
+  return new Promise((resolve, reject) => {
+    const result = parseDataURI(uri);
+    contentType = result.MIME;
+    buffer = result.buffer;
+
+    if (result) resolve({
+      mimetype: result.MIME,
+      buffer: result.buffer,
+      mediatype: result.mediaType
+    })
+    else reject('error')
+  })
+
+}

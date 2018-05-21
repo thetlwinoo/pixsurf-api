@@ -42,7 +42,6 @@
     "cloudinary": "^1.11.0",
     "compression": "^1.7.2",
     "cors": "^2.8.4",
-    "data-uri-to-file": "^0.1.8",
     "dauria": "^2.0.0",
     "feathers-blob": "^2.0.0",
     "feathers-hooks-common": "^4.11.1",

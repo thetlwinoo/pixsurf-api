@@ -64,6 +64,7 @@ class Service {
   }
 
   async upload(file, filename) {
+    console.log(file)
     return new Promise((resolve, reject) => {
       // const gfs = Grid(mongoUrl);      
       const conn = mongoose.createConnection(this.options.mongoUrl);
@@ -76,7 +77,7 @@ class Service {
         let writeStream = gfs.createWriteStream({
           filename: filename,
           mode: 'w',
-          content_type: file.mimeType
+          content_type: file.mimetype
         });
 
         writeStream.on('close', (file) => {
