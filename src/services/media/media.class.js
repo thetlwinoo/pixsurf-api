@@ -11,13 +11,16 @@ class Service {
 
   async find(params) {
     return await this.download(params.query.filename).catch(err => {
-      return { error: err }
+      return {
+        error: err
+      }
     });
   }
 
   async get(id, params) {
     return {
-      id, text: `A new message with ID: ${id}!`
+      id,
+      text: `A new message with ID: ${id}!`
     };
   }
 
@@ -25,9 +28,13 @@ class Service {
     if (Array.isArray(data)) {
       return Promise.all(data.map(current => this.create(current, params)));
     }
+
     const file = data.file;
 
-    console.log('FFile', file)
+    if (!file) {
+      return new Error('No File Found!');
+    }
+
     return await this.upload(file)
       .then(v => {
         data = v;
@@ -47,7 +54,9 @@ class Service {
   }
 
   async remove(id, params) {
-    return { id };
+    return {
+      id
+    };
   }
 
   async upload(file) {
@@ -83,7 +92,9 @@ class Service {
       let gfs;
       conn.once('open', () => {
         gfs = Grid(conn.db);
-        gfs.files.find({ filename: filename }).toArray((err, files) => {
+        gfs.files.find({
+          filename: filename
+        }).toArray((err, files) => {
 
           if (files.length === 0) {
             reject('File Not Found!');
