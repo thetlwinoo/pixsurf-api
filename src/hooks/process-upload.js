@@ -11,7 +11,7 @@ module.exports = function (options = {}) {
       params
     } = context;
     // console.log(context.data)
-    const media = await app.service('media').create({ file: context.params.file });
+    const media = await app.service('media').create(context.data);
 
     // const uri = context.data.uri;
     console.log('MEDIA',media)
