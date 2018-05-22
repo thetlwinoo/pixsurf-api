@@ -2,6 +2,7 @@ const {
   authenticate
 } = require('@feathersjs/authentication').hooks;
 const processUpload = require('../../hooks/process-upload');
+const deleteImage = require('../../hooks/delete-image');
 
 module.exports = {
   before: {
@@ -11,7 +12,7 @@ module.exports = {
     create: [processUpload()],
     update: [],
     patch: [],
-    remove: []
+    remove: [deleteImage()]
   },
 
   after: {

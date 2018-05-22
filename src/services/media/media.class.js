@@ -171,7 +171,7 @@ class Service {
             resolve({
               message: 'success',
               error: false,
-              id: opt._id
+              id: option._id
             });
           });
         })
