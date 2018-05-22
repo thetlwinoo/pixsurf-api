@@ -12,7 +12,9 @@ class Service {
   }
 
   async find(params) {
-    return await this.download(params.query.filename).catch(err => {
+    return await this.download({
+      filename: params.query.filename
+    }).catch(err => {
       return {
         error: err
       }
@@ -20,10 +22,13 @@ class Service {
   }
 
   async get(id, params) {
-    return {
-      id,
-      text: `A new message with ID: ${id}!`
-    };
+    return await this.getFile({
+      _id: id
+    }).catch(err => {
+      return {
+        error: err
+      }
+    });
   }
 
   async create(data, params) {
@@ -58,9 +63,13 @@ class Service {
   }
 
   async remove(id, params) {
-    return {
-      id
-    };
+    return await this.removeFile({
+        _id: id
+      })
+      .then(v => v)
+      .catch(err => {
+        throw new Error(err);
+      })
   }
 
   async upload(file, filename) {
@@ -102,16 +111,14 @@ class Service {
     })
   }
 
-  async download(filename) {
+  async download(option) {
     return new Promise((resolve, reject) => {
       const conn = mongoose.createConnection(this.options.mongoUrl);
 
       let gfs;
       conn.once('open', () => {
         gfs = Grid(conn.db);
-        gfs.files.find({
-          filename: filename
-        }).toArray((err, files) => {
+        gfs.files.find(option).toArray((err, files) => {
 
           if (files.length === 0) {
             reject('File Not Found!');
@@ -139,6 +146,69 @@ class Service {
           });
 
         });
+      });
+    });
+  }
+
+  async removeFile(option) {
+    console.log(option)
+    return new Promise((resolve, reject) => {
+      const conn = mongoose.createConnection(this.options.mongoUrl);
+
+      let gfs;
+      conn.once('open', () => {
+        gfs = Grid(conn.db);
+        gfs.exist(option, (err, found) => {
+          if (err) {
+            reject(err);
+            return false;
+          }
+          gfs.remove(option, (err) => {
+            if (err) {
+              reject(err);
+              return false;
+            }
+            resolve({
+              message: 'success',
+              error: false,
+              id: opt._id
+            });
+          });
+        })
+      });
+    });
+  }
+
+  async getFile(option) {
+    return new Promise((resolve, reject) => {
+      const conn = mongoose.createConnection(this.options.mongoUrl);
+
+      let gfs;
+      conn.once('open', () => {
+        gfs = Grid(conn.db);
+
+        let data = [];
+
+        gfs.files.find().toArray(function (err, files) {
+          const file = files.filter(file => file._id == option._id)[0];
+          let readstream = gfs.createReadStream(option);
+
+          readstream.on('data', (chunk) => {
+            data.push(chunk);
+          });
+
+          readstream.on('end', () => {
+            data = Buffer.concat(data);
+            let img = 'data:' + file.contentType + ';base64,' + Buffer(data).toString('base64');
+            resolve(img);
+          });
+
+          readstream.on('error', (err) => {
+            reject(err);
+            return false;
+          });
+        });
+        // console.log('File', file)        
       });
     });
   }
