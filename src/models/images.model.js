@@ -33,7 +33,8 @@ module.exports = function (app) {
     },
     sortOrder: {
       type: Number,
-      default: 0
+      default: 0,
+      required: true
     },
     isBaseImage: {
       type: Boolean,
