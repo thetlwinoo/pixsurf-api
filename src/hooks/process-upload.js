@@ -14,7 +14,7 @@ module.exports = function (options = {}) {
     const media = await app.service('media').create(context.data);
 
     // const uri = context.data.uri;
-    console.log('MEDIA',media)
+    console.log('MEDIA', media)
     if (!media) {
       throw new Error('Upload image failed');
     }
@@ -26,13 +26,14 @@ module.exports = function (options = {}) {
       media: media._id,
       fileName: media.filename,
       size: data.size,
-      width: data.width,
-      height: data.height,
       stockItemId: data.stockItemId,
-      isBaseImage: data.isBaseImage,
-      isSmallImage: data.isSmallImage,
-      isThumbnail: data.isThumbnail,
-      exclude: data.exclude
+      isBaseImage: false,
+      isSmallImage: false,
+      isThumbnail: false,
+      webkitRelativePath: data.webkitRelativePath,
+      lastModified: data.lastModified,
+      sortOrder: 0,
+      exclude: false
     }
 
     return context;

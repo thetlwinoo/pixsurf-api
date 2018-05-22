@@ -31,6 +31,10 @@ module.exports = function (app) {
       type: Date,
       default: Date.now()
     },
+    sortOrder: {
+      type: Number,
+      default: 0
+    },
     isBaseImage: {
       type: Boolean,
       default: false
