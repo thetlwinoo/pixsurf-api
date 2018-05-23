@@ -96,9 +96,6 @@ module.exports = function (app) {
     internalComments: {
       type: String
     },
-    photo: {
-      type: Schema.Types.ObjectId
-    },
     customFields: Object,
     tags: [String],
     searchDetails: {
