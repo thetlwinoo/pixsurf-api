@@ -17,6 +17,10 @@ const languages = require('./languages/languages.service.js');
 const images = require('./images/images.service.js');
 const uploads = require('./uploads/uploads.service.js');
 const media = require('./media/media.service.js');
+const customers = require('./customers/customers.service.js');
+const addresses = require('./addresses/addresses.service.js');
+const addressTypes = require('./address-types/address-types.service.js');
+const geoLocations = require('./geo-locations/geo-locations.service.js');
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   app.configure(users);
@@ -38,4 +42,8 @@ module.exports = function (app) {
   app.configure(images);
   app.configure(uploads);
   app.configure(media);
+  app.configure(customers);
+  app.configure(addresses);
+  app.configure(addressTypes);
+  app.configure(geoLocations);
 };
