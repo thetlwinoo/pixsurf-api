@@ -73,7 +73,6 @@ class Service {
   }
 
   async upload(file, filename) {
-    console.log(file)
     return new Promise((resolve, reject) => {
       // const gfs = Grid(mongoUrl);      
       const conn = mongoose.createConnection(this.options.mongoUrl);
@@ -151,7 +150,6 @@ class Service {
   }
 
   async removeFile(option) {
-    console.log(option)
     return new Promise((resolve, reject) => {
       const conn = mongoose.createConnection(this.options.mongoUrl);
 
@@ -208,7 +206,6 @@ class Service {
             return false;
           });
         });
-        // console.log('File', file)        
       });
     });
   }

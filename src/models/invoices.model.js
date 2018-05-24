@@ -1,4 +1,4 @@
-// customers-model.js - A mongoose model
+// invoices-model.js - A mongoose model
 // 
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
@@ -7,8 +7,8 @@ module.exports = function (app) {
   const {
     Schema
   } = mongooseClient;
-  const customers = new Schema({
-    person: {
+  const invoices = new Schema({
+    customer: {
       type: Schema.Types.ObjectId,
       required: true
     },
@@ -16,50 +16,59 @@ module.exports = function (app) {
       type: Schema.Types.ObjectId,
       required: true
     },
-    customerCategories: {
+    order: {
       type: Schema.Types.ObjectId,
       required: true
-    },
-    buyingGroup: {
-      type: Schema.Types.ObjectId,
-      required: true
-    },
-    primaryContactPerson: {
-      type: Schema.Types.ObjectId,
-      required: true
-    },
-    alternateContactPerson: {
-      type: Schema.Types.ObjectId
     },
     deliveryMethod: {
       type: Schema.Types.ObjectId,
       required: true
     },
-    deliveryAddress: {
+    constactPerson: {
       type: Schema.Types.ObjectId,
       required: true
     },
-    creditLimit: {
-      type: Number
+    accountPerson: {
+      type: Schema.Types.ObjectId,
+      required: true
     },
-    accountOpenedDate: {
+    salesPerson: {
+      type: Schema.Types.ObjectId,
+      required: true
+    },
+    packedByPerson: {
+      type: Schema.Types.ObjectId,
+      required: true
+    },
+    invoiceDate: {
       type: Date,
-      required: true,
-      default: Date.now()
+      required: true
     },
-    standardDiscountPercentage: {
+    customerPurchaseOrderNumber: {
+      type: String,
+      required: true
+    },
+    isCreditNote: {
+      type: Boolean,
+      required: true
+    },
+    creditNoteReason: {
+      type: String
+    },
+    comments: {
+      type: String
+    },
+    deliveryInstructions: {
+      type: String
+    },
+    internalComments: {
+      type: String
+    },
+    totalDryItems: {
       type: Number,
       required: true
     },
-    isStatementSent: {
-      type: Boolean,
-      required: true
-    },
-    isOnCreditHold: {
-      type: Boolean,
-      required: true
-    },
-    paymentDays: {
+    totalChillerItems: {
       type: Number,
       required: true
     },
@@ -69,25 +78,22 @@ module.exports = function (app) {
     runPosition: {
       type: String
     },
-    accountNumber: {
-      type: String,
-      required: true
+    returnedDeliveryData: {
+      type: String
+    },
+    confirmedDeliveryTime: {
+      type: Date
+    },
+    confirmedReceivedBy: {
+      type: String
     },
     lastEditedBy: {
       type: Schema.Types.ObjectId,
-      required: true
-    },
-    validFrom: {
-      type: Date,
-      required: true
-    },
-    validTo: {
-      type: Date,
       required: true
     }
   }, {
     timestamps: true
   });
 
-  return mongooseClient.model('customers', customers);
+  return mongooseClient.model('invoices', invoices);
 };

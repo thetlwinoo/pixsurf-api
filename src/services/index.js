@@ -21,6 +21,15 @@ const customers = require('./customers/customers.service.js');
 const addresses = require('./addresses/addresses.service.js');
 const addressTypes = require('./address-types/address-types.service.js');
 const geoLocations = require('./geo-locations/geo-locations.service.js');
+const buyingGroups = require('./buying-groups/buying-groups.service.js');
+const customerCategories = require('./customer-categories/customer-categories.service.js');
+const customerTransactions = require('./customer-transactions/customer-transactions.service.js');
+const invoices = require('./invoices/invoices.service.js');
+const invoiceLines = require('./invoice-lines/invoice-lines.service.js');
+const orderTracking = require('./order-tracking/order-tracking.service.js');
+const receipts = require('./receipts/receipts.service.js');
+const orders = require('./orders/orders.service.js');
+const orderLines = require('./order-lines/order-lines.service.js');
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   app.configure(users);
@@ -46,4 +55,13 @@ module.exports = function (app) {
   app.configure(addresses);
   app.configure(addressTypes);
   app.configure(geoLocations);
+  app.configure(buyingGroups);
+  app.configure(customerCategories);
+  app.configure(customerTransactions);
+  app.configure(invoices);
+  app.configure(invoiceLines);
+  app.configure(orderTracking);
+  app.configure(receipts);
+  app.configure(orders);
+  app.configure(orderLines);
 };
