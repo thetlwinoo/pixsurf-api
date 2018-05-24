@@ -4,7 +4,9 @@
 // for more of what you can do here.
 module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
-  const { Schema } = mongooseClient;
+  const {
+    Schema
+  } = mongooseClient;
   const addresses = new Schema({
     addressType: {
       type: Schema.Types.ObjectId,
@@ -43,11 +45,13 @@ module.exports = function (app) {
     },
     validFrom: {
       type: Date,
-      required: true
+      required: true,
+      default: Date.now()
     },
     validTo: {
       type: Date,
-      required: true
+      required: true,
+      default: Date.now()
     }
   }, {
     timestamps: true
