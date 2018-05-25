@@ -32,8 +32,7 @@ module.exports = function (app) {
       required: true
     },
     geoLocation: {
-      type: Schema.Types.ObjectId,
-      required: true
+      type: String
     },
     postalCode: {
       type: String,

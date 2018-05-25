@@ -20,7 +20,6 @@ const media = require('./media/media.service.js');
 const customers = require('./customers/customers.service.js');
 const addresses = require('./addresses/addresses.service.js');
 const addressTypes = require('./address-types/address-types.service.js');
-const geoLocations = require('./geo-locations/geo-locations.service.js');
 const buyingGroups = require('./buying-groups/buying-groups.service.js');
 const customerCategories = require('./customer-categories/customer-categories.service.js');
 const customerTransactions = require('./customer-transactions/customer-transactions.service.js');
@@ -54,7 +53,6 @@ module.exports = function (app) {
   app.configure(customers);
   app.configure(addresses);
   app.configure(addressTypes);
-  app.configure(geoLocations);
   app.configure(buyingGroups);
   app.configure(customerCategories);
   app.configure(customerTransactions);
