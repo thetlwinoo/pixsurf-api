@@ -15,13 +15,13 @@ module.exports = {
   },
 
   after: {
-    all: [{
+    all: [populate({
       lastEditedBy: {
         service: 'general/people',
         f_key: '_id',
         one: true,
       }
-    }],
+    })],
     find: [],
     get: [],
     create: [],
