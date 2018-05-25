@@ -14,6 +14,26 @@ module.exports = {
 
   after: {
     all: [populate({
+      city: {
+        service: 'general/cities',
+        f_key: '_id',
+        one: true,
+      },
+      country: {
+        service: 'general/countries',
+        f_key: '_id',
+        one: true,
+      },
+      addressType: {
+        service: 'general/address-types',
+        f_key: '_id',
+        one: true,
+      },
+      stateProvince: {
+        service: 'general/state-provinces',
+        f_key: '_id',
+        one: true,
+      },
       lastEditedBy: {
         service: 'general/people',
         f_key: '_id',
