@@ -16,7 +16,7 @@ module.exports = function (app) {
       type: Schema.Types.ObjectId,
       required: true
     },
-    customerCategories: {
+    customerCategory: {
       type: Schema.Types.ObjectId,
       required: true
     },
