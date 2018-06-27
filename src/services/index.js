@@ -29,6 +29,9 @@ const orderTracking = require('./order-tracking/order-tracking.service.js');
 const receipts = require('./receipts/receipts.service.js');
 const orders = require('./orders/orders.service.js');
 const orderLines = require('./order-lines/order-lines.service.js');
+const categories = require('./categories/categories.service.js');
+const subcategories = require('./subcategories/subcategories.service.js');
+const classifications = require('./classifications/classifications.service.js');
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   app.configure(users);
@@ -62,4 +65,7 @@ module.exports = function (app) {
   app.configure(receipts);
   app.configure(orders);
   app.configure(orderLines);
+  app.configure(categories);
+  app.configure(subcategories);
+  app.configure(classifications);
 };
