@@ -52,7 +52,7 @@ module.exports = function (app) {
       default: "A"
     },
     children: [{
-      type: Object
+      type: Schema.Types.ObjectId
     }]
   }, {
     timestamps: true
