@@ -4,9 +4,47 @@
 // for more of what you can do here.
 module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
-  const { Schema } = mongooseClient;
+  const {
+    Schema
+  } = mongooseClient;
   const classifications = new Schema({
-    text: { type: String, required: true }
+    title: {
+      type: String,
+      required: true
+    },
+    type: {
+      type: String,
+      required: true
+    },
+    translate: {
+      type: String,
+      required: true
+    },
+    data: {
+      type: Object
+    },
+    hidden: {
+      type: String,
+      default: false
+    },
+    url: {
+      type: String
+    },
+    exactMatch: {
+      type: Boolean,
+      default: false
+    },
+    externalUrl: {
+      type: Boolean,
+      default: false
+    },
+    openInNewTab: {
+      type: Boolean,
+      default: false
+    },
+    children: [{
+      type: Object
+    }]
   }, {
     timestamps: true
   });
