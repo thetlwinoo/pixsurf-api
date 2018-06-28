@@ -46,6 +46,11 @@ module.exports = function (app) {
       type: Boolean,
       default: false
     },
+    status: {
+      type: String,
+      required: true,
+      default: "A"
+    },
     children: [{
       type: Object
     }]
