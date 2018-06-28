@@ -28,7 +28,7 @@ module.exports = function (app) {
       type: Object
     },
     hidden: {
-      type: String,
+      type: Boolean,
       default: false
     },
     url: {
