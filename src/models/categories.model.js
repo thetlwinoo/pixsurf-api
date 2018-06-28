@@ -12,6 +12,10 @@ module.exports = function (app) {
       type: String,
       required: true
     },
+    slug: {
+      type: String,
+      required: true
+    },
     type: {
       type: String,
       required: true
