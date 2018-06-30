@@ -15,11 +15,11 @@ module.exports = {
   after: {
     all: [
       populate({
-        children: [{
+        children: {
           service: 'general/subcategories',
           f_key: '_id',
           one: false,
-        }]
+        }
       })
     ],
     find: [],
