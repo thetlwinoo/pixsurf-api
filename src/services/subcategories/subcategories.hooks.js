@@ -1,8 +1,9 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
+const populate = require('feathers-populate-hook');
 
 module.exports = {
   before: {
-    all: [ authenticate('jwt') ],
+    all: [authenticate('jwt')],
     find: [],
     get: [],
     create: [],
@@ -12,7 +13,15 @@ module.exports = {
   },
 
   after: {
-    all: [],
+    all: [
+      populate({
+        children: [{
+          service: 'general/classifications',
+          f_key: '_id',
+          one: false,
+        }]
+      })
+    ],
     find: [],
     get: [],
     create: [],
