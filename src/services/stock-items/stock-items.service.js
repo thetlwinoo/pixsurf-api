@@ -5,7 +5,12 @@ const hooks = require('./stock-items.hooks');
 
 module.exports = function (app) {
   const Model = createModel(app);
-  const paginate = app.get('paginate');
+  // const paginate = app.get('paginate');
+  const paginate = {
+    default: 20,
+    max: 300
+  };
+  
 
   const options = {
     name: 'stock-items',
