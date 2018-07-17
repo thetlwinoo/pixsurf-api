@@ -19,11 +19,14 @@ module.exports = function (options = {}) {
 
       console.log(stockItemList);
 
+      const _IsSpecific = params.query.isBaseImage && params.query.isSmallImage && params.query.isThumbnail;
+      
       await Promise.all(stockItemList.map(async stockItem => {
         const images = [];
 
-        if (params.query.isBaseImage && params.query.isSmallImage && params.query.isThumbnail) {
-          console.log(stockItem)
+        console.log(stockItem, _IsSpecific)
+
+        if (_IsSpecific) {          
           images = await app.service('general/images').find({
             stockItemId: stockItem._id,
             isBaseImage: params.query.isBaseImage,
