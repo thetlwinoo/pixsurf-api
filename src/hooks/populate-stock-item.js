@@ -19,7 +19,7 @@ module.exports = function (options = {}) {
     await Promise.all(stockItemList.map(async stockItem => {
       console.log(stockItem)
       const images = await app.service('general/images').find({
-        'stockItemId': stockItem._id
+        'stockItemId': stockItem.id
       });
 
       stockItem.images = images.data ? images.data : [];
