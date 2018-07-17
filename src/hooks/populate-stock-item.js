@@ -15,7 +15,6 @@ module.exports = function (options = {}) {
     } = context;
 
     if (params.query && params.query.image) {
-      console.log(result);
       const stockItemList = method === 'find' ? result.data : [result];
 
       await Promise.all(stockItemList.map(async stockItem => {
@@ -23,14 +22,14 @@ module.exports = function (options = {}) {
 
         if (params.query.isBaseImage && params.query.isSmallImage && params.query.isThumbnail) {
           images = await app.service('general/images').find({
-            stockItemId: stockItem.id,
+            stockItemId: stockItem._id,
             isBaseImage: params.query.isBaseImage,
             isSmallImage: params.query.isSmallImage,
             isThumbnail: params.query.isThumbnail
           });
         } else {
           images = await app.service('general/images').find({
-            stockItemId: stockItem.id
+            stockItemId: stockItem._id
           });
         }
 
