@@ -15,6 +15,7 @@ module.exports = function (options = {}) {
     } = context;
 
     if (params.query && params.query.image) {
+      console.log(result);
       const stockItemList = method === 'find' ? result.data : [result];
 
       await Promise.all(stockItemList.map(async stockItem => {

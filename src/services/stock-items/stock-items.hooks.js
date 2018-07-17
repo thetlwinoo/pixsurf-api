@@ -8,8 +8,7 @@ module.exports = {
   before: {
     all: [
       authenticate('jwt'),
-      populate.compatibility(),
-      populateStockItem()
+      populate.compatibility()      
     ],
     find: [],
     get: [],
@@ -47,7 +46,8 @@ module.exports = {
           f_key: '_id',
           one: true,
         }
-      })
+      }),
+      populateStockItem()
     ],
     find: [],
     get: [],
