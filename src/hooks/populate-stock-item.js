@@ -23,6 +23,7 @@ module.exports = function (options = {}) {
         const images = [];
 
         if (params.query.isBaseImage && params.query.isSmallImage && params.query.isThumbnail) {
+          console.log(stockItem)
           images = await app.service('general/images').find({
             stockItemId: stockItem._id,
             isBaseImage: params.query.isBaseImage,
@@ -36,7 +37,7 @@ module.exports = function (options = {}) {
         }
 
         console.log(images);
-        
+
         stockItem.images = images ? images : [];
       }));
     }
