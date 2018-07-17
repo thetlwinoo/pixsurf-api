@@ -5,9 +5,11 @@
 module.exports = function (options = {}) {
   return async context => {
 
+    const { app, method, result, params } = context;
+
     const {
       filename
-    } = context.data;
+    } = result.data;
 
     const images = await app.service('media').find({
       query: {
