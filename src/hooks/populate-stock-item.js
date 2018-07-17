@@ -24,8 +24,6 @@ module.exports = function (options = {}) {
         }
       });
 
-      console.log(images.total)
-
       stockItem.images = images.data ? images.data : [];
     }));
 

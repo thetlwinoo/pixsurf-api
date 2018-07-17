@@ -3,6 +3,7 @@ const {
 } = require('@feathersjs/authentication').hooks;
 const processUpload = require('../../hooks/process-upload');
 const deleteImage = require('../../hooks/delete-image');
+const gravatar = require('../../hooks/gravatar');
 
 module.exports = {
   before: {
@@ -17,7 +18,7 @@ module.exports = {
 
   after: {
     all: [],
-    find: [],
+    find: [gravatar()],
     get: [],
     create: [],
     update: [],
