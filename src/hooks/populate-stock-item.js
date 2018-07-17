@@ -14,13 +14,15 @@ module.exports = function (options = {}) {
       params
     } = context;
 
+    console.log(method,result.data);
+    
     if (params.query && params.query.image) {
       const stockItemList = method === 'find' ? result.data : [result];
 
       console.log(stockItemList);
 
       const _IsSpecific = params.query.isBaseImage && params.query.isSmallImage && params.query.isThumbnail;
-      
+
       await Promise.all(stockItemList.map(async stockItem => {
         const images = [];
 
