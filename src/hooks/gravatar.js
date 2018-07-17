@@ -10,13 +10,12 @@ module.exports = function (options = {}) {
     const images = method === 'find' ? result.data : [result];
 
     await Promise.all(images.map(async image => {
-      console.log(image.fileName);
       const avatar = await app.service('media').find({
         query: {
           'filename': image.fileName
         }
       });
-      console.log(avatar);
+      image.avatar = avatar;
     }));
     
     // context.data.avatar = `${gravatarUrl}/${hash}?${query}`;
