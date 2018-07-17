@@ -102,6 +102,7 @@ module.exports = function (app) {
       type: String,
       required: true
     },
+    images:[Object],
     lastEditedBy: {
       type: Schema.Types.ObjectId,
       required: true
