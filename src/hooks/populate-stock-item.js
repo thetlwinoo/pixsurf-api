@@ -14,7 +14,7 @@ module.exports = function (options = {}) {
       params
     } = context;
 
-    console.log(method,result.data);
+    console.log(params.query);
     
     if (params.query && params.query.image) {
       const stockItemList = method === 'find' ? result.data : [result];
