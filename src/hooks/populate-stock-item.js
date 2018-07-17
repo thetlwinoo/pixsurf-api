@@ -14,38 +14,20 @@ module.exports = function (options = {}) {
       params
     } = context;
 
-    console.log(params.query);
-    
-    if (params.query && params.query.image) {
-      const stockItemList = method === 'find' ? result.data : [result];
+    const stockItemList = method === 'find' ? result.data : [result];
 
-      console.log(stockItemList);
+    await Promise.all(stockItemList.map(async stockItem => {
+      const images = [];
 
-      const _IsSpecific = params.query.isBaseImage && params.query.isSmallImage && params.query.isThumbnail;
+      images = await app.service('general/images').find({
+        stockItemId: stockItem._id
+      });
 
-      await Promise.all(stockItemList.map(async stockItem => {
-        const images = [];
+      console.log(images);
 
-        console.log(stockItem, _IsSpecific)
+      stockItem.images = images ? images : [];
+    }));
 
-        if (_IsSpecific) {          
-          images = await app.service('general/images').find({
-            stockItemId: stockItem._id,
-            isBaseImage: params.query.isBaseImage,
-            isSmallImage: params.query.isSmallImage,
-            isThumbnail: params.query.isThumbnail
-          });
-        } else {
-          images = await app.service('general/images').find({
-            stockItemId: stockItem._id
-          });
-        }
-
-        console.log(images);
-
-        stockItem.images = images ? images : [];
-      }));
-    }
     return context;
   };
 };
