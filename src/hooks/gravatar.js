@@ -7,17 +7,17 @@ module.exports = function (options = {}) {
 
     const { app, method, result, params } = context;
 
-    const {
-      filename
-    } = result.data;
+    const images = method === 'find' ? result.data : [result];
 
-    const images = await app.service('media').find({
-      query: {
-        'filename': filename
-      }
-    });
-
-    console.log(images);
+    await Promise.all(images.map(async image => {
+      const avatar = await app.service('media').find({
+        query: {
+          'filename': image.filename
+        }
+      });
+      console.log(avatar);
+    }));
+    
     // context.data.avatar = `${gravatarUrl}/${hash}?${query}`;
 
     return context;
