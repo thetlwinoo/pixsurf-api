@@ -17,6 +17,8 @@ module.exports = function (options = {}) {
     if (params.query && params.query.image) {
       const stockItemList = method === 'find' ? result.data : [result];
 
+      console.log(stockItemList);
+
       await Promise.all(stockItemList.map(async stockItem => {
         const images = [];
 
@@ -33,6 +35,8 @@ module.exports = function (options = {}) {
           });
         }
 
+        console.log(images);
+        
         stockItem.images = images ? images : [];
       }));
     }
