@@ -8,32 +8,8 @@ module.exports = function (app) {
     Schema
   } = mongooseClient;
   const images = new Schema({
-    name: {
-      type: String,
-      required: true
-    },
     stockItemId: {
       type: Schema.Types.ObjectId,
-      required: true
-    },
-    type: {
-      type: String,
-      required: true
-    },
-    size: {
-      type: Number,
-      required: true
-    },
-    webkitRelativePath: {
-      type: String
-    },
-    lastModified: {
-      type: Date,
-      default: Date.now()
-    },
-    sortOrder: {
-      type: Number,
-      default: 0,
       required: true
     },
     isBaseImage: {
@@ -52,10 +28,13 @@ module.exports = function (app) {
       type: Boolean,
       default: false
     },
-    media: {
-      type: Schema.Types.ObjectId
+    data: {
+      type: Object
     },
-    fileName: {
+    file: {
+      type: Object
+    },
+    url: {
       type: String,
       default: ''
     }
