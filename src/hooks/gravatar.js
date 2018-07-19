@@ -27,8 +27,8 @@ module.exports = function (options = {}) {
 
       console.log(images);
 
-      if (images) {
-        stockItem.gravatar = images.length > 0 ? `${images[0].url}`: '';
+      if (images.data) {
+        stockItem.gravatar = images.data.length > 0 ? `${images.data[0].url}`: '';
       }
     }));
 
