@@ -11,12 +11,7 @@ module.exports = function (app) {
     stockItemId: {
       type: Schema.Types.ObjectId,
       required: true
-    },
-    sortOrder: {
-      type: Number,
-      default: 0,
-      required: true
-    },
+    },    
     isBaseImage: {
       type: Boolean,
       default: false
@@ -42,7 +37,12 @@ module.exports = function (app) {
     url: {
       type: String,
       default: ''
-    }
+    },
+    sortOrder: {
+      type: Number,
+      default: 0,
+      required: true
+    },
   }, {
     timestamps: true
   });
