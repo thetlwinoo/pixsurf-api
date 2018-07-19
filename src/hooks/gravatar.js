@@ -2,23 +2,33 @@
 // For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
 
 // eslint-disable-next-line no-unused-vars
+const url = '';
+const query = '';
+
 module.exports = function (options = {}) {
   return async context => {
+    const {
+      app,
+      method,
+      result,
+      params
+    } = context;
 
-    const { app, method, result, params } = context;
+    const stockItemList = method === 'find' ? result.data : [result];
 
-    const images = method === 'find' ? result.data : [result];
+    await Promise.all(stockItemList.map(async stockItem => {
 
-    await Promise.all(images.map(async image => {
-      const avatar = await app.service('media').find({
+      const images = await app.service('general/images').find({
         query: {
-          'filename': image.fileName
+          'stockItemId': stockItem._id,
+          isThumbnail: true
         }
       });
-      image.avatar = avatar;
+
+      if (images) {
+        stockItem.gravatar = images.length > 0 ? images[0].url : '';
+      }
     }));
-    
-    // context.data.avatar = `${gravatarUrl}/${hash}?${query}`;
 
     return context;
   };

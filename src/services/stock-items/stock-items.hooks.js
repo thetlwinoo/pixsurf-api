@@ -2,7 +2,7 @@ const {
   authenticate
 } = require('@feathersjs/authentication').hooks;
 const populate = require('feathers-populate-hook');
-const populateStockItem = require('../../hooks/populate-stock-item');
+const gravatar = require('../../hooks/gravatar');
 
 module.exports = {
   before: {
@@ -47,7 +47,7 @@ module.exports = {
           one: true,
         }
       }),
-      populateStockItem()
+      gravatar()
     ],
     find: [],
     get: [],
