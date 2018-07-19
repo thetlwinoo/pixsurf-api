@@ -25,6 +25,8 @@ module.exports = function (options = {}) {
         }
       });
 
+      console.log(images);
+      
       if (images) {
         stockItem.gravatar = images.length > 0 ? images[0].url : '';
       }
