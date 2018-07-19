@@ -21,7 +21,7 @@ module.exports = function (options = {}) {
       const images = await app.service('general/images').find({
         query: {
           'stockItemId': stockItem._id,
-          isThumbnail: true
+          'isThumbnail': true
         }
       });
 
