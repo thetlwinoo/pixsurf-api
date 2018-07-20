@@ -20,6 +20,7 @@ module.exports = {
 
   after: {
     all: [
+      gravatar(),
       populate({
         supplierID: {
           service: 'purchasing/suppliers',
@@ -46,8 +47,7 @@ module.exports = {
           f_key: '_id',
           one: true,
         }
-      }),
-      gravatar()
+      })      
     ],
     find: [],
     get: [],
