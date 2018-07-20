@@ -16,7 +16,7 @@ const supplierCategories = require('./supplier-categories/supplier-categories.se
 const languages = require('./languages/languages.service.js');
 const images = require('./images/images.service.js');
 const uploads = require('./uploads/uploads.service.js');
-const media = require('./media/media.service.js');
+// const media = require('./media/media.service.js');
 const customers = require('./customers/customers.service.js');
 const addresses = require('./addresses/addresses.service.js');
 const addressTypes = require('./address-types/address-types.service.js');
@@ -53,7 +53,7 @@ module.exports = function (app) {
   app.configure(languages);
   app.configure(images);
   app.configure(uploads);
-  app.configure(media);
+  // app.configure(media);
   app.configure(customers);
   app.configure(addresses);
   app.configure(addressTypes);
