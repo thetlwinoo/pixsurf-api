@@ -15,16 +15,16 @@ module.exports = function (options = {}) {
 
     await Promise.all(stockItemList.map(async stockItem => {
 
-      const images = await app.service('general/images').find({
+      const photos = await app.service('general/photos').find({
         query: {
           'stockItemId': stockItem._id,
           'isThumbnail': true
         }
       });
       
-      if (images.data) {
-        console.log(images.data,'populate');
-        stockItem.gravatar = images.data.length > 0 ? `${images.data[0].url}`: '';
+      if (photos.data) {
+        console.log(photos.data,'populate');
+        stockItem.gravatar = photos.data.length > 0 ? `${photos.data[0].url}`: '';
       }
     }));
 
