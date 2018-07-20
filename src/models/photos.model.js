@@ -42,10 +42,6 @@ module.exports = function (app) {
     url: {
       type: String,
       default: ''
-    },
-    gravatar:{
-      type: string,
-      default: ''
     }
   }, {
     timestamps: true

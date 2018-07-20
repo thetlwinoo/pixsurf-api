@@ -96,6 +96,10 @@ module.exports = function (app) {
     internalComments: {
       type: String
     },
+    gravatar:{
+      type: string,
+      default: ''
+    },
     customFields: Object,
     tags: [String],
     searchDetails: {
