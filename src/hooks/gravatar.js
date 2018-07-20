@@ -23,7 +23,7 @@ module.exports = function (options = {}) {
       });
       
       if (photos.data) {
-        console.log(photos.data,'populate');
+        console.log('populate');
         stockItem.gravatar = photos.data.length > 0 ? `${photos.data[0].url}`: '';
       }
     }));
