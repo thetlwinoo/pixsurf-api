@@ -24,10 +24,9 @@ module.exports = function (options = {}) {
           'isThumbnail': true
         }
       });
-
-      console.log(images);
-
+      
       if (images.data) {
+        console.log(images.data,'populate');
         stockItem.gravatar = images.data.length > 0 ? `${images.data[0].url}`: '';
       }
     }));
