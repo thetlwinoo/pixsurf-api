@@ -97,7 +97,7 @@ module.exports = function (app) {
       type: String
     },
     gravatar:{
-      type: string,
+      type: String,
       default: ''
     },
     customFields: Object,
