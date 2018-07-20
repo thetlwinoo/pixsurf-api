@@ -14,7 +14,6 @@ const deliveryMethods = require('./delivery-methods/delivery-methods.service.js'
 const stateProvinces = require('./state-provinces/state-provinces.service.js');
 const supplierCategories = require('./supplier-categories/supplier-categories.service.js');
 const languages = require('./languages/languages.service.js');
-const images = require('./images/images.service.js');
 const customers = require('./customers/customers.service.js');
 const addresses = require('./addresses/addresses.service.js');
 const addressTypes = require('./address-types/address-types.service.js');
@@ -49,7 +48,6 @@ module.exports = function (app) {
   app.configure(stateProvinces);
   app.configure(supplierCategories);
   app.configure(languages);
-  app.configure(images);
   app.configure(customers);
   app.configure(addresses);
   app.configure(addressTypes);
