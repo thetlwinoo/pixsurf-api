@@ -11,8 +11,9 @@ module.exports = function (options = {}) {
       params
     } = context;
 
+    console.log(result);
     if (result.data.url) {
-      const ret = await app.service('warehouse/stock-items').update(result.stockItemId, {
+      const ret = await app.service('warehouse/stock-items').patch(result.stockItemId, {
         gravatar: `${result.data.url}`
       });
       console.log(ret)
