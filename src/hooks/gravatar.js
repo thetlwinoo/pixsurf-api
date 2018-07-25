@@ -8,10 +8,12 @@ module.exports = function (options = {}) {
       app,
       method,
       result,
-      params
+      params,
+      data
     } = context;
-
-    if (result.data.url) {
+    
+    if (result.data.url && data.isThumbnail) {
+      console.log(data)
       const ret = await app.service('warehouse/stock-items').patch(result.stockItemId, {
         gravatar: `${result.data.url}`
       });
