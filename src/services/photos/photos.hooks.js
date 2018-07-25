@@ -17,8 +17,8 @@ module.exports = {
     find: [],
     get: [],
     create: [],
-    update: [gravatar()],
-    patch: [],
+    update: [],
+    patch: [gravatar()],
     remove: []
   },
 
