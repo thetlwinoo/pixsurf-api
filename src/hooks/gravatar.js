@@ -11,11 +11,13 @@ module.exports = function (options = {}) {
       params
     } = context;
 
-    if(result.data.url){
-      const ret = await app.service('warehouse/stockItems').update(result.stockItemId, {gravatar: `${result.data.url}`});
+    if (result.data.url) {
+      const ret = await app.service('warehouse/stock-items').update(result.stockItemId, {
+        gravatar: `${result.data.url}`
+      });
       console.log(ret)
     }
-    
+
 
     // await Promise.all(stockItemList.map(async stockItem => {
 
@@ -25,7 +27,7 @@ module.exports = function (options = {}) {
     //       'isThumbnail': true
     //     }
     //   });
-      
+
     //   if (photos.data) {
     //     console.log('populate');
     //     stockItem.gravatar = photos.data.length > 0 ? `${photos.data[0].url}`: '';
