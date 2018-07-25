@@ -1,4 +1,5 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
+const gravatar = require('../../hooks/gravatar');
 
 module.exports = {
   before: {
@@ -16,7 +17,7 @@ module.exports = {
     find: [],
     get: [],
     create: [],
-    update: [],
+    update: [gravatar()],
     patch: [],
     remove: []
   },

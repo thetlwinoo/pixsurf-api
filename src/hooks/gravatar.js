@@ -11,22 +11,26 @@ module.exports = function (options = {}) {
       params
     } = context;
 
-    const stockItemList = method === 'find' ? result.data : [result];
+    if(result.data.url){
+      const ret = await app.service('warehouse/stockItems').update(result.stockItemId, {gravatar: `${result.data.url}`});
+      console.log(ret)
+    }
+    
 
-    await Promise.all(stockItemList.map(async stockItem => {
+    // await Promise.all(stockItemList.map(async stockItem => {
 
-      const photos = await app.service('general/photos').find({
-        query: {
-          'stockItemId': stockItem._id,
-          'isThumbnail': true
-        }
-      });
+    //   const photos = await app.service('general/photos').find({
+    //     query: {
+    //       'stockItemId': stockItem._id,
+    //       'isThumbnail': true
+    //     }
+    //   });
       
-      if (photos.data) {
-        console.log('populate');
-        stockItem.gravatar = photos.data.length > 0 ? `${photos.data[0].url}`: '';
-      }
-    }));
+    //   if (photos.data) {
+    //     console.log('populate');
+    //     stockItem.gravatar = photos.data.length > 0 ? `${photos.data[0].url}`: '';
+    //   }
+    // }));
 
     return context;
   };

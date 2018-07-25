@@ -2,7 +2,7 @@ const {
   authenticate
 } = require('@feathersjs/authentication').hooks;
 const populate = require('feathers-populate-hook');
-const gravatar = require('../../hooks/gravatar');
+// const gravatar = require('../../hooks/gravatar');
 
 module.exports = {
   before: {
@@ -20,7 +20,6 @@ module.exports = {
 
   after: {
     all: [
-      gravatar(),
       populate({
         supplierID: {
           service: 'purchasing/suppliers',
