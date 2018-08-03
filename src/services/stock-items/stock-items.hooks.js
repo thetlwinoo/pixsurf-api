@@ -5,16 +5,15 @@ const populate = require('feathers-populate-hook');
 
 module.exports = {
   before: {
-    all: [
-      authenticate('jwt'),
+    all: [      
       populate.compatibility()      
     ],
     find: [],
     get: [],
-    create: [],
-    update: [],
-    patch: [],
-    remove: []
+    create: [authenticate('jwt'),],
+    update: [authenticate('jwt'),],
+    patch: [authenticate('jwt'),],
+    remove: [authenticate('jwt'),]
   },
 
   after: {

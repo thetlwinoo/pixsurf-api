@@ -3,7 +3,7 @@ const populate = require('feathers-populate-hook');
 
 module.exports = {
   before: {
-    all: [ authenticate('jwt') ],
+    all: [authenticate('jwt')],
     find: [],
     get: [],
     create: [],
