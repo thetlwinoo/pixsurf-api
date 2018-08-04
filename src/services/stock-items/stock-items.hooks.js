@@ -6,7 +6,7 @@ const populate = require('feathers-populate-hook');
 module.exports = {
   before: {
     all: [      
-      populate.compatibility()      
+      // populate.compatibility()      
     ],
     find: [],
     get: [],
@@ -18,33 +18,33 @@ module.exports = {
 
   after: {
     all: [
-      populate({
-        supplierID: {
-          service: 'purchasing/suppliers',
-          f_key: '_id',
-          one: true
-        },
-        colorID: {
-          service: 'warehouse/colors',
-          f_key: '_id',
-          one: true
-        },
-        unitPackageID: {
-          service: 'warehouse/package-types',
-          f_key: '_id',
-          one: true
-        },
-        outerPackageID: {
-          service: 'warehouse/package-types',
-          f_key: '_id',
-          one: true
-        },
-        lastEditedBy: {
-          service: 'general/people',
-          f_key: '_id',
-          one: true,
-        }
-      })      
+      // populate({
+      //   supplierID: {
+      //     service: 'purchasing/suppliers',
+      //     f_key: '_id',
+      //     one: true
+      //   },
+      //   colorID: {
+      //     service: 'warehouse/colors',
+      //     f_key: '_id',
+      //     one: true
+      //   },
+      //   unitPackageID: {
+      //     service: 'warehouse/package-types',
+      //     f_key: '_id',
+      //     one: true
+      //   },
+      //   outerPackageID: {
+      //     service: 'warehouse/package-types',
+      //     f_key: '_id',
+      //     one: true
+      //   },
+      //   lastEditedBy: {
+      //     service: 'general/people',
+      //     f_key: '_id',
+      //     one: true,
+      //   }
+      // })      
     ],
     find: [],
     get: [],
