@@ -5,8 +5,8 @@ const populate = require('feathers-populate-hook');
 
 module.exports = {
   before: {
-    all: [      
-      populate.compatibility()      
+    all: [
+      populate.compatibility()
     ],
     find: [],
     get: [],
@@ -23,31 +23,43 @@ module.exports = {
           service: 'purchasing/suppliers',
           f_key: '_id',
           one: true,
-          query:  {
+          query: {
             $select: ['supplierName']
           }
         },
         colorID: {
           service: 'warehouse/colors',
           f_key: '_id',
-          one: true
+          one: true,
+          query: {
+            $select: ['colorName']
+          }
         },
         unitPackageID: {
           service: 'warehouse/package-types',
           f_key: '_id',
-          one: true
+          one: true,
+          query: {
+            $select: ['packageTypeName']
+          }
         },
         outerPackageID: {
           service: 'warehouse/package-types',
           f_key: '_id',
-          one: true
+          one: true,
+          query: {
+            $select: ['packageTypeName']
+          }
         },
         lastEditedBy: {
           service: 'general/people',
           f_key: '_id',
           one: true,
+          query: {
+            $select: ['fullName','preferredName','searchName']
+          }
         }
-      })      
+      })
     ],
     find: [],
     get: [],
