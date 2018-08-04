@@ -19,6 +19,9 @@ module.exports = {
           service: 'general/classifications',
           f_key: '_id',
           one: false,
+          query: {
+            $select: ['title']
+          }
         }
       })
     ],

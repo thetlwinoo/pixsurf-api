@@ -19,6 +19,9 @@ module.exports = {
           service: 'general/subcategories',
           f_key: '_id',
           one: false,
+          query: {
+            $select: ['title']
+          }
         }
       })
     ],

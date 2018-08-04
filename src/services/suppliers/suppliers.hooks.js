@@ -23,37 +23,58 @@ module.exports = {
         supplierCategoryID: {
           service: 'purchasing/supplier-categories',
           f_key: '_id',
-          one: true
+          one: true,
+          query: {
+            $select: ['supplierCategoryName']
+          }
         },
         primaryContactPersonID: {
           service: 'general/people',
           f_key: '_id',
-          one: true
+          one: true,
+          query: {
+            $select: ['fullName','preferredName','searchName']
+          }
         },
         alternateContactPersonID: {
           service: 'general/people',
           f_key: '_id',
-          one: true
+          one: true,
+          query: {
+            $select: ['fullName','preferredName','searchName']
+          }
         },
         deliveryMethodID: {
           service: 'general/delivery-methods',
           f_key: '_id',
-          one: true
+          one: true,
+          query: {
+            $select: ['deliveryMethodName']
+          }
         },
         deliveryCityID: {
           service: 'general/cities',
           f_key: '_id',
-          one: true
+          one: true,
+          query: {
+            $select: ['cityName']
+          }
         },
         postalCityID: {
           service: 'general/cities',
           f_key: '_id',
-          one: true
+          one: true,
+          query: {
+            $select: ['cityName']
+          }
         },
         lastEditedBy: {
           service: 'general/people',
           f_key: '_id',
           one: true,
+          query: {
+            $select: ['fullName','preferredName','searchName']
+          }
         }
       })
     ],

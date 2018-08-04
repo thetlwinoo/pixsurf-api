@@ -21,46 +21,73 @@ module.exports = {
           service: 'general/people',
           f_key: '_id',
           one: true,
+          query: {
+            $select: ['fullName','preferredName','searchName']
+          }
         },
         billToCustomer: {
           service: 'general/people',
           f_key: '_id',
           one: true,
+          query: {
+            $select: ['fullName','preferredName','searchName']
+          }
         },
         customerCategory: {
           service: 'sales/customer-categories',
           f_key: '_id',
           one: true,
+          query: {
+            $select: ['customerCategoryName']
+          }          
         },
         buyingGroup: {
           service: 'sales/buying-groups',
           f_key: '_id',
           one: true,
+          query: {
+            $select: ['customerCategoryName']
+          }
         },
         primaryContactPerson: {
           service: 'general/people',
           f_key: '_id',
           one: true,
+          query: {
+            $select: ['fullName','preferredName','searchName']
+          }
         },
         alternateContactPerson: {
           service: 'general/people',
           f_key: '_id',
           one: true,
+          query: {
+            $select: ['fullName','preferredName','searchName']
+          }
         },
         deliveryMethod: {
           service: 'general/delivery-methods',
           f_key: '_id',
           one: true,
+          query: {
+            $select: ['addressLine1','addressLine2']
+          }
         },
         deliveryAddress: {
           service: 'general/addresses',
           f_key: '_id',
           one: true,
+          query: {
+            $select: ['addressLine1','addressLine2']
+          }
         },
         lastEditedBy: {
           service: 'general/people',
           f_key: '_id',
           one: true,
+          query: {
+            $select: ['fullName','preferredName','searchName']
+          }
         }
       })
     ],

@@ -18,26 +18,41 @@ module.exports = {
         service: 'general/cities',
         f_key: '_id',
         one: true,
+        query: {
+          $select: ['cityName']
+        }
       },
       country: {
         service: 'general/countries',
         f_key: '_id',
         one: true,
+        query: {
+          $select: ['countryName']
+        }
       },
       addressType: {
         service: 'general/address-types',
         f_key: '_id',
         one: true,
+        query: {
+          $select: ['addressTypeName']
+        }
       },
       stateProvince: {
         service: 'general/state-provinces',
         f_key: '_id',
         one: true,
+        query: {
+          $select: ['stateProvinceName']
+        }
       },
       lastEditedBy: {
         service: 'general/people',
         f_key: '_id',
         one: true,
+        query: {
+          $select: ['fullName','preferredName','searchName']
+        }
       }
     })],
     find: [],

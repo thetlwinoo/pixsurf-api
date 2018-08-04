@@ -20,6 +20,9 @@ module.exports = {
         service: 'general/people',
         f_key: '_id',
         one: true,
+        query: {
+          $select: ['fullName','preferredName','searchName']
+        }
       }
     })],
     find: [],
