@@ -1,5 +1,20 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
 const populate = require('feathers-populate-hook');
+const errors = require("@feathersjs/errors");
+const errorHandler = ctx => {
+  if (ctx.error) {
+    const error = ctx.error;
+    if (!error.code) {
+      const newError = new errors.GeneralError("server error");
+      ctx.error = newError;
+      return ctx;
+    }
+    if (error.code === 404 || process.env.NODE_ENV === "production") {
+      error.stack = null;
+    }
+    return ctx;
+  }
+};
 
 module.exports = {
   before: {
@@ -34,7 +49,7 @@ module.exports = {
   },
 
   error: {
-    all: [],
+    all: [errorHandler],
     find: [],
     get: [],
     create: [],
