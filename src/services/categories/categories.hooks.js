@@ -29,16 +29,16 @@ module.exports = {
 
   after: {
     all: [
-      // populate({
-      //   children: {
-      //     service: 'general/subcategories',
-      //     f_key: '_id',
-      //     one: false,
-      //     query: {
-      //       $select: ['title']
-      //     }
-      //   }
-      // })
+      populate({
+        children: {
+          service: 'general/subcategories',
+          f_key: '_id',
+          one: false,
+          query: {
+            $select: ['title']
+          }
+        }
+      })
     ],
     find: [],
     get: [],
