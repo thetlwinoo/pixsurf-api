@@ -15,10 +15,16 @@ class Service {
 
     if (keywords) {
       keywords.data.map(keyword => {
-        keyword.tags.map(tag=> results.push(tag));
+        keyword.tags.map(tag => results.push(tag));
       });
 
-      return results;
+      const unique = (value, index, self) => {
+        return self.indexOf(value) === index;
+      }
+
+      const uniqueValues = results.filter(unique);
+
+      return uniqueValues;
     }
   }
 
