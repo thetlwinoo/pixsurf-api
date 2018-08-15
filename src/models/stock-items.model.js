@@ -7,6 +7,8 @@ module.exports = function (app) {
   const {
     Schema
   } = mongooseClient;
+
+
   const stockItems = new Schema({
     stockItemName: {
       type: String,
@@ -122,5 +124,6 @@ module.exports = function (app) {
     timestamps: true
   });
 
+  stockItems.index({tags:'text'});
   return mongooseClient.model('stockItems', stockItems);
 };

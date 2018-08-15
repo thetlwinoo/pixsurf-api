@@ -7,10 +7,16 @@ class Service {
 
   async find(params) {
     const query = params.query;
-    const results = ["32GB"];
+    const results = [];
 
-    const keywords = await this.app.service('warehouse/stock-items').find({
-      tags: query.key
+    const stockitems = this.app.service('warehouse/stock-items');
+
+    const keywords = await stockitems.find({
+      query: {
+        tags: {
+          $search: query.key
+        }
+      }
     });
 
     if (keywords) {
@@ -18,7 +24,7 @@ class Service {
         keyword.tags.map(tag => results.push(tag));
       });
 
-      const uniqueValues = [...new Set(results)]; 
+      const uniqueValues = [...new Set(results)];
 
       return uniqueValues;
     }

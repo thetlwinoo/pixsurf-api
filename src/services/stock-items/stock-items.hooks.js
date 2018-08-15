@@ -2,13 +2,16 @@ const {
   authenticate
 } = require('@feathersjs/authentication').hooks;
 const populate = require('feathers-populate-hook');
+const search = require('feathers-mongodb-fuzzy-search');
 
 module.exports = {
   before: {
     all: [
       populate.compatibility()
     ],
-    find: [],
+    find: [search(),search({
+      fields: ['tags', 'searchDetails']
+    })],
     get: [],
     create: [authenticate('jwt'),],
     update: [authenticate('jwt'),],

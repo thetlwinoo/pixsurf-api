@@ -45,6 +45,7 @@
     "dauria": "^2.0.0",
     "feathers-blob": "^2.0.0",
     "feathers-hooks-common": "^4.11.1",
+    "feathers-mongodb-fuzzy-search": "^1.1.1",
     "feathers-mongoose": "^6.1.0",
     "feathers-populate-hook": "^0.2.3",
     "feathers-shallow-populate": "^0.2.6",

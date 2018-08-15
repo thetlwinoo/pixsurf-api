@@ -23,6 +23,5 @@ module.exports = function (app) {
 
   // Get our initialized service so that we can register hooks and filters
   const service = app.service('warehouse/stock-items');
-
   service.hooks(hooks);
 };
