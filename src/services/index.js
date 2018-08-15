@@ -31,6 +31,7 @@ const subcategories = require('./subcategories/subcategories.service.js');
 const classifications = require('./classifications/classifications.service.js');
 const customRunner = require('./custom-runner/custom-runner.service.js');
 const photos = require('./photos/photos.service.js');
+const keywords = require('./keywords/keywords.service.js');
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   app.configure(users);
@@ -66,4 +67,5 @@ module.exports = function (app) {
   app.configure(classifications);
   app.configure(customRunner);
   app.configure(photos);
+  app.configure(keywords);
 };
