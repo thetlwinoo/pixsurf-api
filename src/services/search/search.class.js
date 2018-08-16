@@ -9,15 +9,17 @@ class Service {
 
   async find(params) {
     const results = [];
-    if (_.isEmpty(params.query)) {
-      return results;
-    }
-
     const query = params.query;
+    var key = "";
 
+    if (_.isEmpty(params.query)) {
+      key = "";
+    }        
+    
+    key = query.key ? query.key : "";
+    
     const stockitems = this.app.service('warehouse/stock-items');
-
-    const filters = query.key.replace(/\s/g,"") == "" ? await stockitems.find() : await stockitems.find({
+    const filters = key.replace(/\s/g, "") == "" ? await stockitems.find() : await stockitems.find({
       query: {
         $or: [{
             tags: {
@@ -31,7 +33,7 @@ class Service {
           }
         ]
       }
-    });    
+    });
 
     return filters;
   }
