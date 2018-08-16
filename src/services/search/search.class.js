@@ -14,10 +14,10 @@ class Service {
 
     if (_.isEmpty(params.query)) {
       key = "";
-    }        
-    
+    }
+
     key = query.key ? query.key : "";
-    
+
     const stockitems = this.app.service('warehouse/stock-items');
     const filters = key.replace(/\s/g, "") == "" ? await stockitems.find() : await stockitems.find({
       query: {
@@ -28,6 +28,11 @@ class Service {
           },
           {
             searchDetails: {
+              $search: query.key
+            }
+          },
+          {
+            stockItemName: {
               $search: query.key
             }
           }

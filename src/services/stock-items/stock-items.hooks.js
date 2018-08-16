@@ -10,7 +10,7 @@ module.exports = {
       populate.compatibility()
     ],
     find: [search(),search({
-      fields: ['tags', 'searchDetails']
+      fields: ['tags', 'searchDetails', 'stockItemName']
     })],
     get: [],
     create: [authenticate('jwt'),],
