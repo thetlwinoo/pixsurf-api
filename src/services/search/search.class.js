@@ -18,12 +18,21 @@ class Service {
 
     key = query.key ? query.key : "";
 
-    console.log(query)
+    const _limit = query.$limit ? parseInt(query.$limit, 10) : 20;
+    const _skip = query.$skip ? parseInt(query.$skip, 10) : 0;
+
     const stockitems = this.app.service('warehouse/stock-items');
-    const filters = key.replace(/\s/g, "") == "" ? await stockitems.find() : await stockitems.find({
+    
+    const filters = key.replace(/\s/g, "") == "" ? await stockitems.find({
       query: {
-        $limit: query.$limit,
-        $skip: query.$skip,
+        $limit: _limit,
+        $skip: _skip
+      }
+
+    }) : await stockitems.find({
+      query: {
+        $limit: _limit,
+        $skip: _skip,
         $or: [{
             tags: {
               $search: query.key
