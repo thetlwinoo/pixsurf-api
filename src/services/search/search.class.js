@@ -18,11 +18,12 @@ class Service {
 
     key = query.key ? query.key : "";
 
+    console.log(query)
     const stockitems = this.app.service('warehouse/stock-items');
     const filters = key.replace(/\s/g, "") == "" ? await stockitems.find() : await stockitems.find({
-      $limit: query.$limit,
-      $skip: query.$skip,
       query: {
+        $limit: query.$limit,
+        $skip: query.$skip,
         $or: [{
             tags: {
               $search: query.key
