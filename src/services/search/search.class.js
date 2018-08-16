@@ -15,31 +15,24 @@ class Service {
 
     const query = params.query;
 
-
     const stockitems = this.app.service('warehouse/stock-items');
 
-    const filters = [];
-
-    if (query.key == '') {
-      filters = await stockitems.find();
-    } else {
-      filters = await stockitems.find({
-        query: {
-          $or: [{
-              tags: {
-                $search: query.key
-              }
-            },
-            {
-              searchDetails: {
-                $search: query.key
-              }
+    const filters = query.key.replace(/\s/g,"") == "" ? await stockitems.find() : await stockitems.find({
+      query: {
+        $or: [{
+            tags: {
+              $search: query.key
             }
-          ]
-        }
-      });
-    }
-    
+          },
+          {
+            searchDetails: {
+              $search: query.key
+            }
+          }
+        ]
+      }
+    });    
+
     return filters;
   }
 
