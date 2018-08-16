@@ -14,25 +14,33 @@ class Service {
     }
 
     const query = params.query;
+
+
     const stockitems = this.app.service('warehouse/stock-items');
 
-    const stockItems = await stockitems.find({
-      query: {
-        $or: [{
-            tags: {
-              $search: query.key
-            }
-          },
-          {
-            searchDetails: {
-              $search: query.key
-            }
-          }
-        ]
-      }
-    });
+    const filters = [];
 
-    return stockItems;
+    if (query.key == '') {
+      filters = await stockitems.find();
+    } else {
+      filters = await stockitems.find({
+        query: {
+          $or: [{
+              tags: {
+                $search: query.key
+              }
+            },
+            {
+              searchDetails: {
+                $search: query.key
+              }
+            }
+          ]
+        }
+      });
+    }
+    
+    return filters;
   }
 
   async get(id, params) {
