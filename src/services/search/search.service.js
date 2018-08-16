@@ -1,6 +1,6 @@
-// Initializes the `keywords` service on path `/keywords`
-const createService = require('./keywords.class.js');
-const hooks = require('./keywords.hooks');
+// Initializes the `search` service on path `/search`
+const createService = require('./search.class.js');
+const hooks = require('./search.hooks');
 
 module.exports = function (app) {
 
@@ -11,10 +11,10 @@ module.exports = function (app) {
   };
 
   // Initialize our service with any options it requires
-  app.use('/keywords', createService(app, options));
+  app.use('/search', createService(app, options));
 
   // Get our initialized service so that we can register hooks
-  const service = app.service('keywords');
+  const service = app.service('search');
 
   service.hooks(hooks);
 };
