@@ -18,38 +18,29 @@ class Service {
 
     key = query.key ? query.key : "";
 
-    const _limit = query.$limit ? parseInt(query.$limit, 10) : 20;
-    const _skip = query.$skip ? parseInt(query.$skip, 10) : 0;
-
     const stockitems = this.app.service('warehouse/stock-items');
-    
-    const filters = key.replace(/\s/g, "") == "" ? await stockitems.find({
-      query: {
-        $limit: _limit,
-        $skip: _skip
-      }
-
-    }) : await stockitems.find({
-      query: {
-        $limit: _limit,
-        $skip: _skip,
-        $or: [{
-            tags: {
-              $search: query.key
-            }
-          },
-          {
-            searchDetails: {
-              $search: query.key
-            }
-          },
-          {
-            stockItemName: {
-              $search: query.key
-            }
+    delete query.key;
+    const _query = key.replace(/\s/g, "") == "" ? query : Object.assign(query, {
+      $or: [{
+          tags: {
+            $search: key
           }
-        ]
-      }
+        },
+        {
+          searchDetails: {
+            $search: key
+          }
+        },
+        {
+          stockItemName: {
+            $search: key
+          }
+        }
+      ]
+    });
+
+    const filters = await stockitems.find({
+      query: _query
     });
 
     return filters;
