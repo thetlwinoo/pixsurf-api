@@ -12,9 +12,7 @@ class Service {
     const query = params.query;
     var key = "";
 
-    console.log(params.query);
-    
-    if (_.isEmpty(params.query)) {
+    if (_.isEmpty(query)) {
       key = "";
     }
 
@@ -22,7 +20,9 @@ class Service {
 
     const stockitems = this.app.service('warehouse/stock-items');
     const filters = key.replace(/\s/g, "") == "" ? await stockitems.find() : await stockitems.find({
-      query: {             
+      $limit: query.$limit,
+      $skip: query.$skip,
+      query: {
         $or: [{
             tags: {
               $search: query.key
