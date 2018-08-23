@@ -8,6 +8,9 @@ module.exports = function (app) {
     Schema
   } = mongooseClient;
   const addresses = new Schema({
+    person: {
+      type: Schema.Types.ObjectId
+    },
     addressType: {
       type: Schema.Types.ObjectId,
       required: true
