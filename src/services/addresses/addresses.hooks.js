@@ -14,6 +14,14 @@ module.exports = {
 
   after: {
     all: [populate({
+      person: {
+        service: 'general/people',
+        f_key: '_id',
+        one: true,
+        query: {
+          $select: ['fullName','phoneNumber','emailAddress']
+        }
+      },
       city: {
         service: 'general/cities',
         f_key: '_id',
