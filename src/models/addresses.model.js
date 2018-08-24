@@ -9,11 +9,12 @@ module.exports = function (app) {
   } = mongooseClient;
   const addresses = new Schema({
     person: {
-      type: Schema.Types.ObjectId
+      type: Schema.Types.ObjectId,
+      required: true
     },
     addressType: {
       type: Schema.Types.ObjectId,
-      required: true
+      required: false
     },
     addressLine1: {
       type: String,
@@ -24,26 +25,26 @@ module.exports = function (app) {
     },
     city: {
       type: Schema.Types.ObjectId,
-      required: true
+      required: false
     },
     stateProvince: {
       type: Schema.Types.ObjectId,
-      required: true
+      required: false
     },
     country: {
       type: Schema.Types.ObjectId,
-      required: true
+      required: false
     },
     geoLocation: {
       type: String
     },
     postalCode: {
       type: String,
-      required: true
+      required: false
     },
     lastEditedBy: {
       type: String,
-      required: true
+      required: false
     },
     validFrom: {
       type: Date,
