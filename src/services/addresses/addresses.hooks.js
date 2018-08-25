@@ -1,14 +1,15 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
 const populate = require('feathers-populate-hook');
+const resetDefault = require('../../hooks/reset-default-addresses');
 
 module.exports = {
   before: {
     all: [],
     find: [],
     get: [],
-    create: [],
+    create: [resetDefault()],
     update: [],
-    patch: [],
+    patch: [resetDefault()],
     remove: []
   },
 
