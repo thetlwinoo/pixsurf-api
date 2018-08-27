@@ -14,7 +14,7 @@ module.exports = function (app) {
     },
     salesPerson: {
       type: Schema.Types.ObjectId,
-      required: true
+      required: false
     },
     pickedByPerson: {
       type: Schema.Types.ObjectId
@@ -36,7 +36,7 @@ module.exports = function (app) {
     },
     expectedDeliveryDate: {
       type: Date,
-      required: true
+      required: false
     },
     customerPurchaseOrderNumber: {
       type: String
