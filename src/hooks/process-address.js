@@ -6,8 +6,9 @@ module.exports = function (options = {}) {
   return async context => {
     const user = context.params.user;
 
-    if (user) {
+    if (user && context.data) {
       context.data.person = user._id;
+      context.data.lastEditedBy = user._id;
     }
 
     return context;

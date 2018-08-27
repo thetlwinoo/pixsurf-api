@@ -6,15 +6,15 @@ const resetDefault = require('../../hooks/reset-default-addresses');
 
 module.exports = {
   before: {
-    all: [],
-    find: [processAddress()],
+    all: [processAddress()],
+    find: [],
     get: [],
-    create: [processEditedBy()],
-    update: [processEditedBy()],
-    patch: [processEditedBy()],
-    create: [resetDefault()],
+    create: [],
     update: [],
-    patch: [resetDefault()],
+    patch: [],
+    create: [],
+    update: [],
+    patch: [],
     remove: []
   },
 
