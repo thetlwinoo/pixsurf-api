@@ -4,13 +4,14 @@
 // eslint-disable-next-line no-unused-vars
 module.exports = function (options = {}) {
   return async context => {
-    const user = context.params.user;
-
+    const user = context.params.user;    
+    
     if (user && context.data) {
       context.data.person = user._id;
-      context.data.lastEditedBy = user._id;
+      context.data.lastEditedBy = user._id;      
     }
 
+    console.log(context.data)
     return context;
   };
 };

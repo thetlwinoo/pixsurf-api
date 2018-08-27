@@ -1,4 +1,6 @@
-const { authenticate } = require('@feathersjs/authentication').hooks;
+const {
+  authenticate
+} = require('@feathersjs/authentication').hooks;
 const populate = require('feathers-populate-hook');
 const processEditedBy = require('../../hooks/process-editedby');
 const processAddress = require('../../hooks/process-address');
@@ -6,15 +8,12 @@ const resetDefault = require('../../hooks/reset-default-addresses');
 
 module.exports = {
   before: {
-    all: [processAddress()],
+    all: [authenticate('jwt'), processAddress()],
     find: [],
     get: [],
-    create: [],
-    update: [],
-    patch: [],
-    create: [],
-    update: [],
-    patch: [],
+    create: [resetDefault()],
+    update: [resetDefault()],
+    patch: [resetDefault()],
     remove: []
   },
 
@@ -25,7 +24,7 @@ module.exports = {
         f_key: '_id',
         one: true,
         query: {
-          $select: ['fullName','phoneNumber','emailAddress']
+          $select: ['fullName', 'phoneNumber', 'emailAddress']
         }
       },
       city: {
@@ -65,7 +64,7 @@ module.exports = {
         f_key: '_id',
         one: true,
         query: {
-          $select: ['fullName','preferredName','searchName']
+          $select: ['fullName', 'preferredName', 'searchName']
         }
       }
     })],
