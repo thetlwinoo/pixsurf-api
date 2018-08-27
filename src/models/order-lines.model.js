@@ -21,7 +21,7 @@ module.exports = function (app) {
     },
     unitMeasure: {
       type: Schema.Types.ObjectId,
-      required: true
+      required: false
     },
     quantity: {
       type: Number,
@@ -33,11 +33,12 @@ module.exports = function (app) {
     },
     currencyRate: {
       type: Schema.Types.ObjectId,
-      required: true
+      required: false
     },
     taxRate: {
       type: Number,
-      required: true
+      required: false,
+      default: 0.0
     },
     pickedQuantity: {
       type: Number,

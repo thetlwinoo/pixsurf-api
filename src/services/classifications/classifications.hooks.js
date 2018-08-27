@@ -1,13 +1,14 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
+const processEditedBy = require('../../hooks/process-editedby');
 
 module.exports = {
   before: {
     all: [  ],
     find: [],
     get: [],
-    create: [authenticate('jwt')],
-    update: [authenticate('jwt')],
-    patch: [authenticate('jwt')],
+    create: [authenticate('jwt'),processEditedBy()],
+    update: [authenticate('jwt'),processEditedBy()],
+    patch: [authenticate('jwt'),processEditedBy()],
     remove: [authenticate('jwt')]
   },
 

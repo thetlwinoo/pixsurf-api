@@ -13,11 +13,13 @@ module.exports = function (options = {}) {
     const users = method === 'find' ? result.data : [result];
 
     await Promise.all(users.map(async user => {
-      const profile = await app.service('general/people').find({
-        email: user.email
-      });
-
-      if (profile) {
+      const response = await app.service('general/people').find({
+        query: {
+          emailAddress: user.email
+        }
+      });      
+      if (response && response.data && response.data.length > 0) {
+        const profile = response.data[0];
         user.profile = {
           fullName: profile.fullName,
           preferredName: profile.preferredName,

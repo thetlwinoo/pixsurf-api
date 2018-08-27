@@ -2,6 +2,7 @@ const {
   authenticate
 } = require('@feathersjs/authentication').hooks;
 const populate = require('feathers-populate-hook');
+const processEditedBy = require('../../hooks/process-editedby');
 
 module.exports = {
   before: {
@@ -11,9 +12,9 @@ module.exports = {
     ],
     find: [],
     get: [],
-    create: [],
-    update: [],
-    patch: [],
+    create: [processEditedBy()],
+    update: [processEditedBy()],
+    patch: [processEditedBy(0)],
     remove: []
   },
 

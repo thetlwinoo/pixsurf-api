@@ -1,4 +1,5 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
+const processEditedBy = require('../../hooks/process-editedby');
 
 module.exports = {
   before: {
@@ -6,8 +7,8 @@ module.exports = {
     find: [],
     get: [],
     create: [],
-    update: [],
-    patch: [],
+    update: [processEditedBy()],
+    patch: [processEditedBy()],
     remove: []
   },
 

@@ -24,7 +24,8 @@ module.exports = function (app) {
       required: true
     },
     backOrder: {
-      type: Schema.Types.ObjectId
+      type: Schema.Types.ObjectId,
+      required: false
     },
     accountNumber: {
       type: String
@@ -43,7 +44,7 @@ module.exports = function (app) {
     },
     isUnderSupplyBackOrdered: {
       type: Boolean,
-      required: true
+      required: false
     },
     comments: {
       type: String
@@ -53,6 +54,10 @@ module.exports = function (app) {
     },
     pickingCompletedOn: {
       type: Date
+    },
+    cartString: {
+      type: String,
+      required: true
     },
     lastEditedBy: {
       type: Schema.Types.ObjectId,
