@@ -42,6 +42,10 @@ module.exports = function (app) {
       type: String,
       required: false
     },
+    default: {
+      type: Boolean,
+      required: false
+    },
     lastEditedBy: {
       type: String,
       required: false

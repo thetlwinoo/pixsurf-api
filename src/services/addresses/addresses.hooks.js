@@ -2,6 +2,7 @@ const { authenticate } = require('@feathersjs/authentication').hooks;
 const populate = require('feathers-populate-hook');
 const processEditedBy = require('../../hooks/process-editedby');
 const processAddress = require('../../hooks/process-address');
+const resetDefault = require('../../hooks/reset-default-addresses');
 
 module.exports = {
   before: {
@@ -11,11 +12,22 @@ module.exports = {
     create: [processEditedBy()],
     update: [processEditedBy()],
     patch: [processEditedBy()],
+    create: [resetDefault()],
+    update: [],
+    patch: [resetDefault()],
     remove: []
   },
 
   after: {
     all: [populate({
+      person: {
+        service: 'general/people',
+        f_key: '_id',
+        one: true,
+        query: {
+          $select: ['fullName','phoneNumber','emailAddress']
+        }
+      },
       city: {
         service: 'general/cities',
         f_key: '_id',
