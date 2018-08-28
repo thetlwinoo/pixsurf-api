@@ -8,17 +8,17 @@ const resetDefault = require('../../hooks/reset-default-addresses');
 
 module.exports = {
   before: {
-    all: [authenticate('jwt'), processAddress()],
+    all: [authenticate('jwt')],
     find: [],
     get: [],
-    create: [resetDefault()],
-    update: [resetDefault()],
-    patch: [resetDefault()],
+    create: [processAddress(),resetDefault()],
+    update: [processAddress(),resetDefault()],
+    patch: [processAddress(),resetDefault()],
     remove: []
   },
 
   after: {
-    all: [populate({
+    all: [populate({  
       person: {
         service: 'general/people',
         f_key: '_id',
