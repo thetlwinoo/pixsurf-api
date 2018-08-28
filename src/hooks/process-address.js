@@ -5,14 +5,14 @@
 module.exports = function (options = {}) {
   return async context => {
     const user = context.params.user;    
-    console.log('params',context.params)
+    console.log('Address params',context.params)
 
     if (user && context.data) {
       context.data.person = user._id;
       context.data.lastEditedBy = user._id;      
     }
 
-    console.log(context.data)
+    console.log('Process Address=>',context.data)
     return context;
   };
 };
