@@ -19,14 +19,14 @@ module.exports = {
 
   after: {
     all: [populate({  
-      person: {
-        service: 'general/people',
-        f_key: '_id',
-        one: true,
-        query: {
-          $select: ['fullName', 'preferredName', 'searchName']
-        }
-      },
+      // person: {
+      //   service: 'general/people',
+      //   f_key: '_id',
+      //   one: true,
+      //   query: {
+      //     $select: ['fullName', 'preferredName', 'searchName']
+      //   }
+      // },
       city: {
         service: 'general/cities',
         f_key: '_id',
@@ -59,7 +59,7 @@ module.exports = {
           $select: ['stateProvinceName']
         }
       },
-      lastEditedBy: {
+      person: {
         service: 'general/people',
         f_key: '_id',
         one: true,
