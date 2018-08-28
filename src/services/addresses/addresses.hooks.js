@@ -24,7 +24,7 @@ module.exports = {
         f_key: '_id',
         one: true,
         query: {
-          $select: ['fullName', 'phoneNumber', 'emailAddress']
+          $select: ['fullName', 'preferredName', 'searchName']
         }
       },
       city: {
