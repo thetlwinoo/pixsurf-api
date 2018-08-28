@@ -5,8 +5,6 @@
 module.exports = function (options = {}) {
   return async context => {
     const user = context.params.user;
-
-    console.log('User',user);
     if(user){
       context.data.lastEditedBy = user._id;
     }    
