@@ -47,7 +47,7 @@ module.exports = function (app) {
       required: false
     },
     lastEditedBy: {
-      type: String,
+      type: Schema.Types.ObjectId,
       required: false
     },
     validFrom: {
