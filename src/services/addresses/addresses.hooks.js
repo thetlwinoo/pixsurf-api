@@ -4,7 +4,7 @@ const {
 const populate = require('feathers-populate-hook');
 const processEditedBy = require('../../hooks/process-editedby');
 const processAddress = require('../../hooks/process-address');
-// const populateAddress = require('../../hooks/populate-address');
+const populateAddress = require('../../hooks/populate-address');
 const resetDefault = require('../../hooks/reset-default-addresses');
 
 module.exports = {
@@ -71,7 +71,7 @@ module.exports = {
     })],
     find: [],
     get: [],
-    create: [],
+    create: [populateAddress()],
     update: [],
     patch: [],
     remove: []
