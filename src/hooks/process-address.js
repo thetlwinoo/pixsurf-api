@@ -10,8 +10,7 @@ module.exports = function (options = {}) {
       result,
       params
     } = context;
-
-    console.log('params user',params.user)
+    
     if (params.user) {
       const response = await app.service('general/people').find({
         query: {
@@ -21,7 +20,6 @@ module.exports = function (options = {}) {
 
       if (response.data.length > 0) {
         const user = response.data[0];
-        console.log('Address User', user)
 
         if (user && context.data) {
           context.data.person = user._id;
