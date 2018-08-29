@@ -11,11 +11,18 @@ module.exports = function (options = {}) {
     } = context;
 
     if (result) {
-      context.result = await app.service('general/addresses').find({
+      const addresses = await app.service('general/addresses').find({
         query: {
           person: data.person
         }
       });
+
+      const _result = result;
+
+      context.result = {
+        result: _result,
+        updates: addresses
+      }
     }
     return context;
   };
