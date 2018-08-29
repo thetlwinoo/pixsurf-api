@@ -73,7 +73,7 @@ module.exports = {
     get: [],
     create: [populateAddress()],
     update: [],
-    patch: [],
+    patch: [populateAddress()],
     remove: []
   },
 
