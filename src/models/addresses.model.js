@@ -8,9 +8,6 @@ module.exports = function (app) {
     Schema
   } = mongooseClient;
   const addresses = new Schema({
-    id: {
-      type: String
-    },
     person: {
       type: Schema.Types.ObjectId,
       required: true

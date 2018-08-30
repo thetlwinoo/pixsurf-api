@@ -70,8 +70,7 @@ module.exports = {
             $select: ['fullName', 'preferredName', 'searchName']
           }
         }
-      }),
-      populateId()
+      })
     ],
     find: [],
     get: [],
