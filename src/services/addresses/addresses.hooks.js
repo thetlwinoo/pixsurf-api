@@ -6,6 +6,7 @@ const processEditedBy = require('../../hooks/process-editedby');
 const processAddress = require('../../hooks/process-address');
 const populateAddress = require('../../hooks/populate-address');
 const resetDefault = require('../../hooks/reset-default-addresses');
+const populateId = require('../../hooks/populate-id');
 
 module.exports = {
   before: {
@@ -69,7 +70,8 @@ module.exports = {
             $select: ['fullName', 'preferredName', 'searchName']
           }
         }
-      })
+      }),
+      populateId()
     ],
     find: [],
     get: [],
