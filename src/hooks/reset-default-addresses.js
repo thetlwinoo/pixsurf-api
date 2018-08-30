@@ -9,10 +9,15 @@ module.exports = function (options = {}) {
     } = context;
 
     if (data.default === true) {
-      await app.service('general/addresses').patch(null, { default: false, person: data.person });
+      await app.service('general/addresses').patch(null, {
+        default: false
+      }, {
+        query: {
+          person: data.person
+        }
+      });
     }
 
     return context;
   };
 };
-
