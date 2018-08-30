@@ -12,63 +12,65 @@ module.exports = {
     all: [authenticate('jwt')],
     find: [],
     get: [],
-    create: [processAddress(),resetDefault()],
-    update: [processAddress(),resetDefault()],
-    patch: [processAddress(),resetDefault()],
+    create: [resetDefault()],
+    update: [resetDefault()],
+    patch: [resetDefault()],
     remove: []
   },
 
   after: {
-    all: [populate({  
-      person: {
-        service: 'general/people',
-        f_key: '_id',
-        one: true,
-        query: {
-          $select: ['fullName', 'preferredName', 'searchName']
+    all: [
+      populate({
+        person: {
+          service: 'general/people',
+          f_key: '_id',
+          one: true,
+          query: {
+            $select: ['fullName', 'preferredName', 'searchName']
+          }
+        },
+        city: {
+          service: 'general/cities',
+          f_key: '_id',
+          one: true,
+          query: {
+            $select: ['cityName']
+          }
+        },
+        country: {
+          service: 'general/countries',
+          f_key: '_id',
+          one: true,
+          query: {
+            $select: ['countryName']
+          }
+        },
+        addressType: {
+          service: 'general/address-types',
+          f_key: '_id',
+          one: true,
+          query: {
+            $select: ['addressTypeName']
+          }
+        },
+        stateProvince: {
+          service: 'general/state-provinces',
+          f_key: '_id',
+          one: true,
+          query: {
+            $select: ['stateProvinceName']
+          }
+        },
+        lastEditedBy: {
+          service: 'general/people',
+          f_key: '_id',
+          one: true,
+          query: {
+            $select: ['fullName', 'preferredName', 'searchName']
+          }
         }
-      },
-      city: {
-        service: 'general/cities',
-        f_key: '_id',
-        one: true,
-        query: {
-          $select: ['cityName']
-        }
-      },
-      country: {
-        service: 'general/countries',
-        f_key: '_id',
-        one: true,
-        query: {
-          $select: ['countryName']
-        }
-      },
-      addressType: {
-        service: 'general/address-types',
-        f_key: '_id',
-        one: true,
-        query: {
-          $select: ['addressTypeName']
-        }
-      },
-      stateProvince: {
-        service: 'general/state-provinces',
-        f_key: '_id',
-        one: true,
-        query: {
-          $select: ['stateProvinceName']
-        }
-      },
-      lastEditedBy: {
-        service: 'general/people',
-        f_key: '_id',
-        one: true,
-        query: {
-          $select: ['fullName', 'preferredName', 'searchName']
-        }
-      }
-    })],
+      })
+    ],
     find: [],
     get: [],
     create: [],
