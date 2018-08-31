@@ -1,11 +1,14 @@
-const { authenticate } = require('@feathersjs/authentication').hooks;
+const {
+  authenticate
+} = require('@feathersjs/authentication').hooks;
+const populate = require('feathers-populate-hook');
 const processOrder = require('../../hooks/process-order');
-const populateOrder = require('../../hooks/populate-order');
+const processOrderLines = require('../../hooks/process-order-lines');
 const processEditedBy = require('../../hooks/process-editedby');
 
 module.exports = {
   before: {
-    all: [ authenticate('jwt') ],
+    all: [authenticate('jwt')],
     find: [],
     get: [],
     create: [processOrder()],
@@ -15,10 +18,37 @@ module.exports = {
   },
 
   after: {
-    all: [],
+    all: [
+      populate({
+        customer: {
+          service: 'general/people',
+          f_key: '_id',
+          one: true,
+          query: {
+            $select: ['fullName', 'preferredName', 'searchName']
+          }
+        },
+        contactPerson: {
+          service: 'general/people',
+          f_key: '_id',
+          one: true,
+          query: {
+            $select: ['fullName', 'preferredName', 'searchName']
+          }
+        },
+        lastEditedBy: {
+          service: 'general/people',
+          f_key: '_id',
+          one: true,
+          query: {
+            $select: ['fullName', 'preferredName', 'searchName']
+          }
+        },
+      })
+    ],
     find: [],
     get: [],
-    create: [populateOrder()],
+    create: [processOrderLines()],
     update: [],
     patch: [],
     remove: []

@@ -55,8 +55,8 @@ module.exports = function (app) {
     pickingCompletedOn: {
       type: Date
     },
-    cartString: {
-      type: String,
+    cart: {
+      type: Object,
       required: true
     },
     lastEditedBy: {
