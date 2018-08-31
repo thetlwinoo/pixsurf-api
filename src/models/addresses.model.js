@@ -12,6 +12,10 @@ module.exports = function (app) {
       type: Schema.Types.ObjectId,
       required: true
     },
+    contactName: {
+      type: String,
+      required: true
+    },
     addressType: {
       type: Schema.Types.ObjectId,
       required: false

@@ -13,23 +13,23 @@ module.exports = {
     all: [authenticate('jwt')],
     find: [],
     get: [],
-    create: [processAddress(), resetDefault()],
-    update: [processAddress(), resetDefault()],
-    patch: [processAddress(), resetDefault()],
+    create: [processEditedBy(), resetDefault()],
+    update: [processEditedBy(), resetDefault()],
+    patch: [processEditedBy(), resetDefault()],
     remove: []
   },
 
   after: {
     all: [
       populate({
-        person: {
-          service: 'general/people',
-          f_key: '_id',
-          one: true,
-          query: {
-            $select: ['fullName', 'preferredName', 'searchName']
-          }
-        },
+        // person: {
+        //   service: 'general/people',
+        //   f_key: '_id',
+        //   one: true,
+        //   query: {
+        //     $select: ['fullName', 'preferredName', 'searchName']
+        //   }
+        // },
         // city: {
         //   service: 'general/cities',
         //   f_key: '_id',
