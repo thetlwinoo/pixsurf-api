@@ -13,9 +13,9 @@ module.exports = {
     all: [authenticate('jwt')],
     find: [],
     get: [],
-    create: [],
-    update: [],
-    patch: [],
+    create: [resetDefault()],
+    update: [resetDefault()],
+    patch: [resetDefault()],
     remove: []
   },
 
